@@ -47,6 +47,7 @@ public:
     void  setLine(int l, vector<char> squares);
     void  rotateClockWise();
     void  rotateCounterClockWise();
+    bool  allSameColor();
     friend ostream &operator<<(ostream &os, const Face &face);
 };
 

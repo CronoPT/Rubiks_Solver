@@ -72,12 +72,12 @@ void Face::setColumn(int c, vector<char> new_column)
 /*==============================================================
 | function: getLine
 ==============================================================*/
-vector<char> Face::getLine(int c) const
+vector<char> Face::getLine(int l) const
 {
     vector<char> line(_n, 0);
 
     for(int i=0; i<_n; i++)
-        line[i] = getPosition(i, c);
+        line[i] = getPosition(l, i);
 
     return line;
 }
@@ -85,10 +85,10 @@ vector<char> Face::getLine(int c) const
 /*==============================================================
 | function: setLine
 ==============================================================*/
-void Face::setLine(int c, vector<char> new_line)
+void Face::setLine(int l, vector<char> new_line)
 {
     for(int i=0; i<_n; i++)
-        setPosition(i, c, new_line[i]);
+        setPosition(l, i, new_line[i]);
 }
 
 /*==============================================================
@@ -131,6 +131,20 @@ void Face::rotateCounterClockWise()
             new_c = l;
             setPosition(new_l, new_c, old_face[l*_n + c]);
         }
+}
+
+/*==============================================================
+| function: allSameColor
+==============================================================*/
+bool Face::allSameColor()
+{
+    int first_color = _squares[0];
+
+    for(int i=1; i<_n; i++)
+        if(_squares[i] != first_color)
+            return false;
+
+    return true;
 }
 
 /*==============================================================
