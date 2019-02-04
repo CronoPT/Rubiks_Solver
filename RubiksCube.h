@@ -39,6 +39,18 @@ class RubiksCube
         vector<Face> _faces;
         int _n;
 
+        void rotateFrontClockWise(int squares);
+        void rotateBackClockWise(int squares);
+        void rotateTopClockWise(int squares);
+        void rotateBottomClockWise(int squares);
+        void rotateRightClockWise(int squares);
+        void rotateLeftClockWise(int squares);
+        
+        int getFaceToTop(int face);
+        int getFaceToBottom(int face);
+        int getFaceToRight(int face);
+        int getFaceToLeft(int faces);
+
     public:
         RubiksCube(int n, vector<Face> faces);
         void rotateFaceClockWise(int face, int squares);

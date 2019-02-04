@@ -17,12 +17,8 @@
 ==============================================================*/
 Face::Face(int n, vector<char> squares)
 {
-    int size = n*n;
-    _squares.assign(size, 0);
+    _squares = squares;
     _n = n;
-
-    for(int i=0; i<size; i++)
-        _squares[i] = squares[i];
 }
 
 /*==============================================================
