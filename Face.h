@@ -32,23 +32,26 @@ using namespace std;
 ==============================================================*/
 class Face
 {  
-private:
-    vector<char> _squares;
-    int _n;
+    private:
+        vector<char> _squares;
+        int _n;
 
-public:
-    Face(int n, vector<char> squares);
-    int   getN() const;
-    char  getPosition(int l, int c) const;
-    void  setPosition(int l, int c, char newSquare);
-    vector<char> getColumn(int c) const;
-    void  setColumn(int c, vector<char> squares);
-    vector<char> getLine(int l) const;
-    void  setLine(int l, vector<char> squares);
-    void  rotateClockWise();
-    void  rotateCounterClockWise();
-    bool  allSameColor();
-    friend ostream &operator<<(ostream &os, const Face &face);
+    public:
+        Face(int n, vector<char> squares);
+        int   getN() const;
+        char  getPositionByIndex(int index) const;
+        char  getPosition(int l, int c) const;
+        void  setPosition(int l, int c, char newSquare);
+        vector<char> getColumn(int c) const;
+        void  setColumn(int c, vector<char> squares);
+        vector<char> getLine(int l) const;
+        void  setLine(int l, vector<char> squares);
+        void  rotateClockWise();
+        void  rotateCounterClockWise();
+        bool  allSameColor();
+        friend ostream& operator<<(ostream &os, const Face &face);
+        friend bool     operator==(const Face& face_1, const Face& face_2);
+        friend bool     operator!=(const Face& face_1, const Face& face_2);   
 };
 
 #endif

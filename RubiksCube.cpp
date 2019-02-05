@@ -86,6 +86,13 @@ void RubiksCube::rotateFaceCounterClockWise(int face, int squares)
 }
 
 /*==============================================================
+| function: getN
+==============================================================*/
+int RubiksCube::getN() const{
+    return _n;
+}
+
+/*==============================================================
 | function: getFace - returns the face indexed by "face"
 ==============================================================*/
 Face RubiksCube::getFace(int face) const
@@ -131,7 +138,7 @@ bool RubiksCube::solved()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-ostream &operator<<(ostream &os, const RubiksCube &cube)
+ostream& operator<<(ostream &os, const RubiksCube &cube)
 {
     for(int i=0; i<6; i++)
     {
@@ -139,6 +146,29 @@ ostream &operator<<(ostream &os, const RubiksCube &cube)
         os << cube.getFace(i) << endl;
     }
     return os;
+}
+
+/*==============================================================
+| function: "comparison"
+==============================================================*/
+bool operator==(const RubiksCube& cube_1, const RubiksCube& cube_2)
+{
+    if(cube_1.getN() != cube_2.getN())
+        return false;
+
+    for(int i=0; i<6; i++)
+        if(cube_1.getFace(i) != cube_2.getFace(i))
+            return false;
+
+    return true;
+}
+
+/*==============================================================
+| function: "comparison"
+==============================================================*/
+bool operator!=(const RubiksCube& cube_1, const RubiksCube& cube_2)
+{
+    return !(cube_1 == cube_2);
 }
 
 /*==============================================================

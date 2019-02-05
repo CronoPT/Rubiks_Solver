@@ -66,10 +66,10 @@ class RubiksCube
         void rotateRightCounterClockWise(int squares);
         void rotateLeftCounterClockWise(int squares);
 
-        int getFaceToTop(int face) const;
+        int getFaceToTop(int face)    const;
         int getFaceToBottom(int face) const;
-        int getFaceToRight(int face) const;
-        int getFaceToLeft(int faces) const;
+        int getFaceToRight(int face)  const;
+        int getFaceToLeft(int faces)  const;
 
     public:
         RubiksCube(int n, vector<Face> faces);
@@ -77,10 +77,13 @@ class RubiksCube
           Face left, Face top, Face back);
         void   rotateFaceClockWise(int face, int squares);
         void   rotateFaceCounterClockWise(int face, int squares);
+        int    getN() const;
         Face   getFace(int face) const;
         string getFaceDescription(int face) const;
         bool   solved();
-        friend ostream &operator<<(ostream &os, const RubiksCube &cube);
+        friend ostream& operator<<(ostream &os, const RubiksCube &cube);
+        friend bool     operator==(const RubiksCube& cube_1, const RubiksCube& cube_2);
+        friend bool     operator!=(const RubiksCube& cube_1, const RubiksCube& cube_2);
 };
 
 #endif

@@ -30,6 +30,14 @@ int Face::getN() const
 }
 
 /*==============================================================
+| function: getPositionByIndex
+==============================================================*/
+char Face::getPositionByIndex(int index) const
+{
+    return _squares[index];
+}
+
+/*==============================================================
 | function: getPosition - get the contents, i.e color, of
 | a given position
 ==============================================================*/
@@ -150,7 +158,7 @@ bool Face::allSameColor()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-ostream &operator<<(ostream &os, const Face &face)
+ostream& operator<<(ostream &os, const Face &face)
 {   
     int n = face.getN();
     for(int l=0; l<n; l++)
@@ -162,4 +170,29 @@ ostream &operator<<(ostream &os, const Face &face)
         os << endl; 
     }
     return os;
+}
+
+/*==============================================================
+| function: "comparison"
+==============================================================*/
+bool operator==(const Face& face_1, const Face& face_2)
+{
+    if(face_1.getN() != face_2.getN())
+        return false;
+
+    int n = face_1.getN();
+
+    for(int i=0; i<n; i++)
+        if(face_1.getPositionByIndex(i) != face_2.getPositionByIndex(i))
+            return false;
+
+    return true;
+}
+
+/*==============================================================
+| function: "comparison"
+==============================================================*/
+bool operator!=(const Face& face_1, const Face& face_2)
+{
+    return !(face_1 == face_2);
 }
