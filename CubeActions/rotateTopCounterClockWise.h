@@ -12,7 +12,15 @@
 
 #include "../Action.h"
 #include "../RubiksCube.h"
+#include <iostream>
 
+/*==============================================================
+| class: rotateTopCounterClockWise - squares is the number of 
+| squares to swap between the faces adjacent to the one you're 
+| rotating, for examples, in the 3x3 cube, squares can't be
+| diferent from 1, since it does not make sense to rotate
+| beyond the middle
+==============================================================*/
 class rotateTopCounterClockWise: public Action<RubiksCube>
 {
     private:
@@ -28,5 +36,11 @@ class rotateTopCounterClockWise: public Action<RubiksCube>
         {
             cube.rotateFaceCounterClockWise(TOP, _squares);
             return cube;
+        }
+
+        friend ostream& operator<<(ostream& os, const rotateTopCounterClockWise& r)
+        {
+            os << "Top Counter Clock " << r._squares;
+            return os;
         }
 };

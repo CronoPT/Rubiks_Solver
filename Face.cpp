@@ -158,7 +158,7 @@ bool Face::allSameColor()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-ostream& operator<<(ostream &os, const Face &face)
+ostream& operator<<(ostream& os, const Face& face)
 {   
     int n = face.getN();
     for(int l=0; l<n; l++)

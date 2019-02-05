@@ -1,7 +1,7 @@
 
 #include "Face.h"
 #include "RubiksCube.h"
-#include "CubeActions/rotateFrontClockWise.h"
+#include "CubeActions/rotateBackClockWise.h"
 #include <vector>
 
 using namespace std;
@@ -12,12 +12,13 @@ int main()
 {   
     RubiksCube my_cube = foo();
 
-    rotateFrontClockWise action = rotateFrontClockWise(1);
+    rotateBackClockWise action(1);
 
     RubiksCube other_cube = action.execute(my_cube);
 
     cout << my_cube << endl;
     cout << other_cube << endl;
+    cout << action << endl;
 }
 
 RubiksCube foo(){

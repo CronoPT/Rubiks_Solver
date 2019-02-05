@@ -138,7 +138,7 @@ bool RubiksCube::solved()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-ostream& operator<<(ostream &os, const RubiksCube &cube)
+ostream& operator<<(ostream& os, const RubiksCube& cube)
 {
     for(int i=0; i<6; i++)
     {

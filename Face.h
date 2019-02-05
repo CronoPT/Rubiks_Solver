@@ -49,7 +49,7 @@ class Face
         void  rotateClockWise();
         void  rotateCounterClockWise();
         bool  allSameColor();
-        friend ostream& operator<<(ostream &os, const Face &face);
+        friend ostream& operator<<(ostream& os, const Face& face);
         friend bool     operator==(const Face& face_1, const Face& face_2);
         friend bool     operator!=(const Face& face_1, const Face& face_2);   
 };
