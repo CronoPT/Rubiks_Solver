@@ -19,6 +19,7 @@ int main()
     cout << my_cube << endl;
     cout << other_cube << endl;
     cout << action << endl;
+
 }
 
 RubiksCube foo(){
