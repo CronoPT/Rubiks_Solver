@@ -10,7 +10,10 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#include "../Action.h"
+#ifndef __ROTATEBOTTOMCLOCKWISE_H__
+#define __ROTATEBOTTOMCLOCKWISE_H__
+
+#include "../Search/Action.h"
 #include "../RubiksCube.h"
 #include <iostream>
 
@@ -44,3 +47,5 @@ class rotateBottomClockWise: public Action<RubiksCube>
             return os;
         }
 };
+
+#endif

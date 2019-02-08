@@ -1,3 +1,4 @@
 *.gch
 teste.cpp
 *.out
+*.o

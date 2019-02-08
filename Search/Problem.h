@@ -10,9 +10,16 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
+#ifndef __PROBLEM_H__
+#define __PROBLEM_H__ 
+
 #include "Action.h"
 #include "Node.h"
 #include <vector>
+
+using namespace std;
+
+class SearchingAlgorithm;
 
 /*==============================================================
 | class: Problem - a template of things to implement for a
@@ -41,3 +48,5 @@ class Problem
         }
 
 };
+
+#endif

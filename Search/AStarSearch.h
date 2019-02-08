@@ -10,12 +10,17 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
+#ifndef __ASTARSEARCH_H__
+#define __ASTARSEARCH_H__ 
+
 #include "SearchingAlgorithm.h"
 #include "Action.h"
 #include "Problem.h"
 #include <vector>
 #include <queue>
 #include <algorithm>
+
+using namespace std;
 
 template <typename C>
 class AStarSearch: public SearchingAlgorithm<C>
@@ -47,4 +52,6 @@ class AStarSearch: public SearchingAlgorithm<C>
 
             //throw some exception indicating the problemhas no solution        
         }
-}
+};
+
+#endif

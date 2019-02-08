@@ -10,6 +10,9 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
+#ifndef __NODE_H__
+#define __NODE_H__ 
+
 #include "Action.h"
 
 template <typename C>
@@ -56,4 +59,6 @@ class Node
         {
             return node_1.getPathCost() > node_2.getPathCost();
         }
-}
+};
+
+#endif
