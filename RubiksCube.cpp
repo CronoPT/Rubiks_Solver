@@ -88,8 +88,17 @@ void RubiksCube::rotateFaceCounterClockWise(int face, int squares)
 /*==============================================================
 | function: getN
 ==============================================================*/
-int RubiksCube::getN() const{
+int RubiksCube::getN() const
+{
     return _n;
+}
+
+/*==============================================================
+| function: getFaces
+==============================================================*/
+vector<Face> RubiksCube::getFaces() const
+{
+    return _faces;
 }
 
 /*==============================================================
@@ -167,6 +176,14 @@ bool operator==(const RubiksCube& cube_1, const RubiksCube& cube_2)
 | function: "comparison"
 ==============================================================*/
 bool operator!=(const RubiksCube& cube_1, const RubiksCube& cube_2)
+{
+    return !(cube_1 == cube_2);
+}
+
+/*==============================================================
+| function: "comparison"
+==============================================================*/
+bool operator<(const RubiksCube& cube_1, const RubiksCube& cube_2)
 {
     return !(cube_1 == cube_2);
 }

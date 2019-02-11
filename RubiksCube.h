@@ -78,12 +78,14 @@ class RubiksCube
         void   rotateFaceClockWise(int face, int squares);
         void   rotateFaceCounterClockWise(int face, int squares);
         int    getN() const;
+        vector<Face> getFaces() const;
         Face   getFace(int face) const;
         string getFaceDescription(int face) const;
         bool   solved();
         friend ostream& operator<<(ostream& os, const RubiksCube& cube);
         friend bool     operator==(const RubiksCube& cube_1, const RubiksCube& cube_2);
         friend bool     operator!=(const RubiksCube& cube_1, const RubiksCube& cube_2);
+        friend bool     operator<(const RubiksCube& cube_1, const RubiksCube& cube_2);
 };
 
 #endif

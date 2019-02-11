@@ -19,7 +19,7 @@
 
 using namespace std;
 
-class SearchingAlgorithm;
+template<typename C> class SearchingAlgorithm;
 
 /*==============================================================
 | class: Problem - a template of things to implement for a
@@ -30,23 +30,36 @@ class Problem
 {
     private:
         C _initial;
-        C _goal;
 
     public:
-        Problem(C initial, C goal);
-        Problem(C initial);
-        C getInitialState() const { return _initial; }
-        C getGoalState()    const { return _goal;    }
-        
-        virtual vector<Action<C>> actions(C state) = 0; //virtual function
-        C   result(C state, Action<C> action);
-        virtual bool goalTest(C state) = 0; //virtual function
-        int pathCost(int cost, C state_1, Action<C> action, C state_2);
-        vector<Action<C>> solve(SearchingAlgorithm algorithm)
+        Problem(C initial):
+        _initial(initial)
         {
-            return algorithm.execute(this);
+            // _initial = initial; 
         }
 
+        C getInitialState() const { return _initial; }
+
+        virtual vector<Action<C>*> actions(C state) = 0; //virtual function
+
+        C result(C state, Action<C>* action)
+        {
+            return action->execute(state);
+        }
+
+        virtual bool goalTest(C state) = 0; //virtual function
+
+        double pathCost(double cost, C state_1, Action<C>* action, C state_2)
+        {
+            return cost+1;
+        }
+
+        virtual double heuristic(C state) = 0;
+
+        vector<Action<C>*> solve(SearchingAlgorithm<C>* algorithm)
+        {
+            return algorithm->execute(&this);
+        }
 };
 
 #endif
