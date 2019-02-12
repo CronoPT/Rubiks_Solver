@@ -38,7 +38,7 @@ class Cubing: public Problem<RubiksCube>
         vector<Action<RubiksCube>*> actions(RubiksCube cube)
         {   
             vector<Action<RubiksCube>*> res;
-            for(int i=0; i<cube.getN(); i++)
+            for(int i=1; i<=(int)cube.getN()/2; i++)
             {
                 res.push_back(new rotateBackClockWise(i));
                 res.push_back(new rotateBackCounterClockWise(i));
@@ -53,6 +53,9 @@ class Cubing: public Problem<RubiksCube>
                 res.push_back(new rotateLeftClockWise(i));
                 res.push_back(new rotateLeftCounterClockWise(i));
             }
+        
+            for(Action<RubiksCube>* a : res)
+                cout << *a << endl;
 
             return res;
         }

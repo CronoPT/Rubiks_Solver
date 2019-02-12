@@ -15,6 +15,20 @@
 #include "Cubing.h"
 #include "Search/Action.h"
 #include "Search/AStarSearch.h"
+
+#include "CubeActions/rotateBackClockWise.h"
+#include "CubeActions/rotateBackCounterClockWise.h"
+#include "CubeActions/rotateFrontClockWise.h"
+#include "CubeActions/rotateFrontCounterClockWise.h"
+#include "CubeActions/rotateTopClockWise.h"
+#include "CubeActions/rotateTopCounterClockWise.h"
+#include "CubeActions/rotateBottomClockWise.h"
+#include "CubeActions/rotateBottomCounterClockWise.h"
+#include "CubeActions/rotateRightClockWise.h"
+#include "CubeActions/rotateRightCounterClockWise.h"
+#include "CubeActions/rotateLeftClockWise.h"
+#include "CubeActions/rotateLeftCounterClockWise.h"
+
 #include <vector>
 
 using namespace std;
@@ -28,10 +42,11 @@ int main()
     AStarSearch<RubiksCube> algorithm;
     vector<Action<RubiksCube>*> solution = algorithm.execute(&problem);
 
-    for(Action<RubiksCube>* a : solution)
-        cout << a << endl;
+    cout << "I ended the search" << endl;
 
-    cout << my_cube << endl;
+    // for(Action<RubiksCube>* a : solution)
+    //     cout << a << endl;
+
 }
 
 RubiksCube foo()

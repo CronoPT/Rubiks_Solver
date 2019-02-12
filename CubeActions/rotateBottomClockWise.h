@@ -17,6 +17,8 @@
 #include "../RubiksCube.h"
 #include <iostream>
 
+using namespace std;
+
 /*==============================================================
 | class: rotateBottomClockWise - squares is the number of squares
 | to swap between the faces adjacent to the one you're 

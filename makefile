@@ -1,4 +1,4 @@
-CFLAGS = -O
+CFLAGS = -O -g
 CC = g++
 
 rubiksSolver: main.o Face.o RubiksCube.o

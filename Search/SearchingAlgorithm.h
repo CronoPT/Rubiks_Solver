@@ -16,7 +16,6 @@
 #include "Action.h"
 #include "Problem.h"
 #include <vector>
-#include <stack>
 
 using namespace std;
 

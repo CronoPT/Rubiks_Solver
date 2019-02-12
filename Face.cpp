@@ -146,9 +146,9 @@ void Face::rotateCounterClockWise()
 ==============================================================*/
 bool Face::allSameColor()
 {
-    int first_color = _squares[0];
-
-    for(int i=1; i<_n; i++)
+    char first_color = _squares[0];
+    int  size = _n*_n;
+    for(int i=1; i<size; i++)
         if(_squares[i] != first_color)
             return false;
 
