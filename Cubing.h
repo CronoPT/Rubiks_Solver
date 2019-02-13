@@ -37,6 +37,7 @@ class Cubing: public Problem<RubiksCube>
 
         vector<Action<RubiksCube>*> actions(RubiksCube cube)
         {   
+            Action<RubiksCube>* a;
             vector<Action<RubiksCube>*> res;
             for(int i=1; i<=(int)cube.getN()/2; i++)
             {
@@ -51,11 +52,8 @@ class Cubing: public Problem<RubiksCube>
                 res.push_back(new rotateRightClockWise(i));
                 res.push_back(new rotateRightCounterClockWise(i));
                 res.push_back(new rotateLeftClockWise(i));
-                res.push_back(new rotateLeftCounterClockWise(i));
+                res.push_back(new rotateLeftCounterClockWise(i)); 
             }
-        
-            for(Action<RubiksCube>* a : res)
-                cout << *a << endl;
 
             return res;
         }
@@ -72,6 +70,9 @@ class Cubing: public Problem<RubiksCube>
 
         double heuristic(RubiksCube cube)
         {
+            if(cube.solved())
+                return 0;
+
             int to_subtract = 0;
             int n = cube.getN();
             for(Face face : cube.getFaces())
@@ -92,6 +93,34 @@ class Cubing: public Problem<RubiksCube>
                                 to_subtract++;
                     }
             return n*n*6*4 - to_subtract;
+        }
+
+        void printAction(Action<RubiksCube>* a)
+        {
+            if(dynamic_cast<rotateBackClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateBackClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateBackCounterClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateBackCounterClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateFrontClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateFrontClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateFrontCounterClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateFrontCounterClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateTopClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateTopClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateTopCounterClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateTopCounterClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateBottomClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateBottomClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateBottomCounterClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateBottomCounterClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateRightClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateRightClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateRightCounterClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateRightCounterClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateLeftClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateLeftClockWise*>(a) << endl;
+            else if(dynamic_cast<rotateLeftCounterClockWise*>(a)!=nullptr)
+                cout << *dynamic_cast<rotateLeftCounterClockWise*>(a) << endl;
         }
 };
 

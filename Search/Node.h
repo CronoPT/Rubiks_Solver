@@ -55,6 +55,16 @@ class Node
         {
             return node_1.getPathCost() > node_2.getPathCost();
         }
+
+        friend bool operator<(const Node<C>& node_1, const Node<C>*& node_2)
+        {
+            return node_1->getPathCost() < node_2->getPathCost();
+        }
+
+        friend bool operator>(const Node<C>& node_1, const Node<C>*& node_2)
+        {
+            return node_1->getPathCost() > node_2->getPathCost();
+        }
 };
 
 #endif

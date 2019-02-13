@@ -60,6 +60,8 @@ class Problem
         {
             return algorithm->execute(&this);
         }
+
+        virtual void printAction(Action<C>* a) = 0;
 };
 
 #endif
