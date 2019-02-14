@@ -20,6 +20,7 @@
 #include <stack>
 #include <set>
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -30,13 +31,12 @@ class AStarSearch: public SearchingAlgorithm<C>
         /*==============================================================
         | function: execute
         ==============================================================*/
-        vector<Action<C>*> execute(Problem<C>* problem)
+        vector<shared_ptr<Action<C>>> execute(Problem<C>* problem)
         {
-            Node<C>* node = new Node<C>(problem->getInitialState(), nullptr, nullptr, \
-              problem->heuristic(problem->getInitialState()));
-            priority_queue<Node<C>*, vector<Node<C>*>, std::greater<Node<C>*>> frontier;
+            shared_ptr<Node<C>> node = make_shared<Node<C>>(problem->getInitialState(), nullptr, nullptr, 0);
+            priority_queue<shared_ptr<Node<C>>, vector<shared_ptr<Node<C>>>, std::greater<shared_ptr<Node<C>>>> frontier;
             set<C> explored;
-            vector<Action<C>*> actions;
+            vector<shared_ptr<Action<C>>> actions;
 
             frontier.push(node);
 
@@ -46,19 +46,17 @@ class AStarSearch: public SearchingAlgorithm<C>
                 frontier.pop();
 
                 if( problem->goalTest(node->getState()) )  
-                    return solution(node, problem); /*builds a vector with the actions*/
+                    return solution(node); /*builds a vector with the actions*/
                 
                 explored.insert(node->getState());
 
                 /*expansion*/
-                for(Action<C>* action : problem->actions(node->getState()))
+                for(shared_ptr<Action<C>> action : problem->actions(node->getState()))
                 {
-                    Node<C>* child = childNode(problem, action, node);
-
+                    shared_ptr<Node<C>> child = childNode(problem, action, node);
                     if( explored.count(child->getState())==0 )
                         frontier.push(child);
                 }
-                delete node;
             } 
             //throw some exception indicating the problem has no solution        
         }
@@ -66,25 +64,25 @@ class AStarSearch: public SearchingAlgorithm<C>
         /*==============================================================
         | function: rotateFaceClockWise
         ==============================================================*/
-        Node<C>* childNode(Problem<C>* problem, Action<C>* action, Node<C>* parent)
+        shared_ptr<Node<C>> childNode(Problem<C>* problem, shared_ptr<Action<C>> action, shared_ptr<Node<C>> parent)
         {
             C state = problem->result(parent->getState(), action);
 
             double path_cost = problem->pathCost(parent->getPathCost(), \
               parent->getState(), action, state);
 
-            return new Node<C>(state, parent, action, path_cost);
+            return make_shared<Node<C>>(state, parent, action, path_cost);
 
         }
 
         /*==============================================================
         | function: rotateFaceClockWise
         ==============================================================*/
-        vector<Action<C>*> solution(Node<C>* node, Problem<C>* p)
+        vector<shared_ptr<Action<C>>> solution(shared_ptr<Node<C>> node)
         {
-            stack<Action<C>*>  sol_stack;
-            vector<Action<C>*> solution;
-            Node<C>* curr_node = node;
+            stack<shared_ptr<Action<C>>>  sol_stack;
+            vector<shared_ptr<Action<C>>> solution;
+            shared_ptr<Node<C>> curr_node = node;
 
             /*the initial state node has a Null action*/
             while( curr_node->getAction() )

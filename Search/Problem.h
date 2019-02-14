@@ -16,6 +16,7 @@
 #include "Action.h"
 #include "Node.h"
 #include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -40,28 +41,28 @@ class Problem
 
         C getInitialState() const { return _initial; }
 
-        virtual vector<Action<C>*> actions(C state) = 0; //virtual function
+        virtual vector<shared_ptr<Action<C>>> actions(C state) = 0; //virtual function
 
-        C result(C state, Action<C>* action)
+        C result(C state, shared_ptr<Action<C>> action)
         {
             return action->execute(state);
         }
 
         virtual bool goalTest(C state) = 0; //virtual function
 
-        double pathCost(double cost, C state_1, Action<C>* action, C state_2)
+        double pathCost(double cost, C state_1, shared_ptr<Action<C>> action, C state_2)
         {
             return cost+1;
         }
 
         virtual double heuristic(C state) = 0;
 
-        vector<Action<C>*> solve(SearchingAlgorithm<C>* algorithm)
+        vector<shared_ptr<Action<C>>> solve(SearchingAlgorithm<C>* algorithm)
         {
             return algorithm->execute(&this);
         }
 
-        virtual void printAction(Action<C>* a) = 0;
+        virtual void printAction(shared_ptr<Action<C>> a) = 0;
 };
 
 #endif

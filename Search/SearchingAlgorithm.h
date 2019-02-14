@@ -23,7 +23,7 @@ template <typename C>
 class SearchingAlgorithm
 {
     public:
-        virtual vector<Action<C>*> execute(Problem<C>* problem) = 0;
+        virtual vector<shared_ptr<Action<C>>> execute(Problem<C>* problem) = 0;
 };
 
 #endif

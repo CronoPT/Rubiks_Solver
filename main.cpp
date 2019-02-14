@@ -30,6 +30,7 @@
 #include "CubeActions/rotateLeftCounterClockWise.h"
 
 #include <vector>
+#include <memory>
 
 using namespace std;
 
@@ -40,37 +41,36 @@ int main()
     RubiksCube my_cube = foo();
     Cubing problem(my_cube);
     AStarSearch<RubiksCube> algorithm;
-    vector<Action<RubiksCube>*> solution = algorithm.execute(&problem);
+    vector<shared_ptr<Action<RubiksCube>>> solution = algorithm.execute(&problem);
 
     cout << "SOLUTION:" << endl;
 
-    for(Action<RubiksCube>* a : solution)
+    for(shared_ptr<Action<RubiksCube>> a : solution)
     {
         problem.printAction(a);
     }
-
 }
 
 RubiksCube foo()
 {
     // front | bottom | right | left | top | back
 
-    vector<char> aux = {GREEN, WHITE, RED, ORANGE, WHITE, GREEN, YELLOW, GREEN, ORANGE};
+    vector<char> aux = {BLUE, WHITE, BLUE, WHITE, WHITE, GREEN, GREEN, GREEN, ORANGE};
     Face front_face(3, aux);
     
-    aux = {WHITE, BLUE, GREEN, BLUE, YELLOW, WHITE, YELLOW, RED, YELLOW};
+    aux = {RED, YELLOW, RED, YELLOW, YELLOW, BLUE, ORANGE, BLUE, GREEN};
     Face back_face(3, aux);
 
-    aux = {BLUE, ORANGE, RED, WHITE, RED, WHITE, BLUE, GREEN, BLUE};
+    aux = {YELLOW, ORANGE, WHITE, ORANGE, RED, BLUE, BLUE, GREEN, GREEN};
     Face right_face(3, aux);
 
-    aux = {ORANGE, YELLOW, ORANGE, RED, ORANGE, YELLOW, BLUE, BLUE, RED};
+    aux = {WHITE, BLUE, YELLOW, ORANGE, ORANGE, RED, RED, RED, ORANGE};
     Face left_face(3, aux);
 
-    aux = {YELLOW, ORANGE, GREEN, BLUE, BLUE, GREEN, WHITE, ORANGE, WHITE};
+    aux = {GREEN, GREEN, BLUE, WHITE, BLUE, YELLOW, RED, ORANGE, ORANGE};
     Face top_face(3, aux);
 
-    aux = {GREEN, RED, WHITE, RED, GREEN, YELLOW, ORANGE, YELLOW, RED};
+    aux = {YELLOW, RED, WHITE, YELLOW, GREEN, WHITE, YELLOW, RED, WHITE};
     Face bottom_face(3, aux);
 
     vector<Face> faces = {front_face, bottom_face, right_face, left_face, top_face, back_face};

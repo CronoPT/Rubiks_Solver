@@ -15,18 +15,21 @@
 
 #include "Action.h"
 
+#include <memory>
+#include <iostream>
+
 template <typename C>
 class Node
 {
     private:
         C          _state;
-        Node<C>*   _parent;
-        Action<C>* _action;
+        shared_ptr<Node<C>>   _parent;
+        shared_ptr<Action<C>> _action;
         double     _path_cost;
 
     public:
-        Node(C state, Node<C>* parent, 
-          Action<C>* action, double path_cost):
+        Node(C state, shared_ptr<Node<C>> parent, 
+          shared_ptr<Action<C>> action, double path_cost):
           _state(state),
           _parent(parent),
           _action(action),
@@ -40,9 +43,9 @@ class Node
 
         C getState() const { return _state; }
 
-        Node<C>* getParent() const  { return _parent; }
+        shared_ptr<Node<C>> getParent() const  { return _parent; }
 
-        Action<C>* getAction() const { return _action; }
+        shared_ptr<Action<C>> getAction() const { return _action; }
 
         double getPathCost() const  { return _path_cost; }
 
@@ -56,12 +59,12 @@ class Node
             return node_1.getPathCost() > node_2.getPathCost();
         }
 
-        friend bool operator<(const Node<C>& node_1, const Node<C>*& node_2)
+        friend bool operator<(const Node<C>& node_1, const shared_ptr<Node<C>>& node_2)
         {
             return node_1->getPathCost() < node_2->getPathCost();
         }
 
-        friend bool operator>(const Node<C>& node_1, const Node<C>*& node_2)
+        friend bool operator>(const Node<C>& node_1, const shared_ptr<Node<C>>& node_2)
         {
             return node_1->getPathCost() > node_2->getPathCost();
         }
