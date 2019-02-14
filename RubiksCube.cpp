@@ -363,7 +363,7 @@ void RubiksCube::rotateFrontCounterClockWise(int squares)
 ==============================================================*/
 void RubiksCube::rotateBackCounterClockWise(int squares)
 {
-    _faces[BACK].rotateClockWise();
+    _faces[BACK].rotateCounterClockWise();
 
     vector<char> turning_column;
     vector<char> turning_line;
@@ -388,7 +388,7 @@ void RubiksCube::rotateBackCounterClockWise(int squares)
 ==============================================================*/
 void RubiksCube::rotateTopCounterClockWise(int squares)
 {
-    _faces[TOP].rotateClockWise();
+    _faces[TOP].rotateCounterClockWise();
 
     vector<char> turning_line_1;
     vector<char> turning_line_2;
@@ -409,7 +409,7 @@ void RubiksCube::rotateTopCounterClockWise(int squares)
 ==============================================================*/
 void RubiksCube::rotateBottomCounterClockWise(int squares)
 {
-    _faces[BOTTOM].rotateClockWise();
+    _faces[BOTTOM].rotateCounterClockWise();
 
     vector<char> turning_line_1;
     vector<char> turning_line_2;
@@ -433,7 +433,7 @@ void RubiksCube::rotateBottomCounterClockWise(int squares)
 ==============================================================*/
 void RubiksCube::rotateRightCounterClockWise(int squares)
 {
-    _faces[RIGHT].rotateClockWise();
+    _faces[RIGHT].rotateCounterClockWise();
 
     vector<char> turning_column_1;
     vector<char> turning_column_2;
@@ -458,7 +458,7 @@ void RubiksCube::rotateRightCounterClockWise(int squares)
 ==============================================================*/
 void RubiksCube::rotateLeftCounterClockWise(int squares)
 {
-    _faces[LEFT].rotateClockWise();
+    _faces[LEFT].rotateCounterClockWise();
 
     vector<char> turning_column_1;
     vector<char> turning_column_2;

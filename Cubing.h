@@ -17,18 +17,18 @@
 #include "Search/Action.h"
 #include "RubiksCube.h"
 
-#include "CubeActions/rotateBackClockWise.h"
-#include "CubeActions/rotateBackCounterClockWise.h"
-#include "CubeActions/rotateFrontClockWise.h"
-#include "CubeActions/rotateFrontCounterClockWise.h"
-#include "CubeActions/rotateTopClockWise.h"
-#include "CubeActions/rotateTopCounterClockWise.h"
-#include "CubeActions/rotateBottomClockWise.h"
-#include "CubeActions/rotateBottomCounterClockWise.h"
-#include "CubeActions/rotateRightClockWise.h"
-#include "CubeActions/rotateRightCounterClockWise.h"
-#include "CubeActions/rotateLeftClockWise.h"
-#include "CubeActions/rotateLeftCounterClockWise.h"
+#include "CubeActions/RotateBackClockWise.h"
+#include "CubeActions/RotateBackCounterClockWise.h"
+#include "CubeActions/RotateFrontClockWise.h"
+#include "CubeActions/RotateFrontCounterClockWise.h"
+#include "CubeActions/RotateTopClockWise.h"
+#include "CubeActions/RotateTopCounterClockWise.h"
+#include "CubeActions/RotateBottomClockWise.h"
+#include "CubeActions/RotateBottomCounterClockWise.h"
+#include "CubeActions/RotateRightClockWise.h"
+#include "CubeActions/RotateRightCounterClockWise.h"
+#include "CubeActions/RotateLeftClockWise.h"
+#include "CubeActions/RotateLeftCounterClockWise.h"
 
 #include <memory>
 
@@ -42,18 +42,18 @@ class Cubing: public Problem<RubiksCube>
             vector<shared_ptr<Action<RubiksCube>>> res;
             for(int i=1; i<=(int)cube.getN()/2; i++)
             {
-                res.push_back(make_shared<rotateBackClockWise>(rotateBackClockWise(i)));
-                res.push_back(make_shared<rotateBackCounterClockWise>(rotateBackCounterClockWise(i)));
-                res.push_back(make_shared<rotateFrontClockWise>(rotateFrontClockWise(i)));
-                res.push_back(make_shared<rotateFrontCounterClockWise>(rotateFrontCounterClockWise(i)));
-                res.push_back(make_shared<rotateTopClockWise>(rotateTopClockWise(i)));
-                res.push_back(make_shared<rotateTopCounterClockWise>(rotateTopCounterClockWise(i)));
-                res.push_back(make_shared<rotateBottomClockWise>(rotateBottomClockWise(i)));
-                res.push_back(make_shared<rotateBottomCounterClockWise>(rotateBottomCounterClockWise(i)));
-                res.push_back(make_shared<rotateRightClockWise>(rotateRightClockWise(i)));
-                res.push_back(make_shared<rotateRightCounterClockWise>(rotateRightCounterClockWise(i)));
-                res.push_back(make_shared<rotateLeftClockWise>(rotateLeftClockWise(i)));
-                res.push_back(make_shared<rotateLeftCounterClockWise>(rotateLeftCounterClockWise(i))); 
+                res.push_back(make_shared<RotateBackClockWise>(RotateBackClockWise(i)));
+                res.push_back(make_shared<RotateBackCounterClockWise>(RotateBackCounterClockWise(i)));
+                res.push_back(make_shared<RotateFrontClockWise>(RotateFrontClockWise(i)));
+                res.push_back(make_shared<RotateFrontCounterClockWise>(RotateFrontCounterClockWise(i)));
+                res.push_back(make_shared<RotateTopClockWise>(RotateTopClockWise(i)));
+                res.push_back(make_shared<RotateTopCounterClockWise>(RotateTopCounterClockWise(i)));
+                res.push_back(make_shared<RotateBottomClockWise>(RotateBottomClockWise(i)));
+                res.push_back(make_shared<RotateBottomCounterClockWise>(RotateBottomCounterClockWise(i)));
+                res.push_back(make_shared<RotateRightClockWise>(RotateRightClockWise(i)));
+                res.push_back(make_shared<RotateRightCounterClockWise>(RotateRightCounterClockWise(i)));
+                res.push_back(make_shared<RotateLeftClockWise>(RotateLeftClockWise(i)));
+                res.push_back(make_shared<RotateLeftCounterClockWise>(RotateLeftCounterClockWise(i))); 
             }
 
             return res;
@@ -98,30 +98,30 @@ class Cubing: public Problem<RubiksCube>
 
         void printAction(shared_ptr<Action<RubiksCube>> a)
         {
-            if(dynamic_pointer_cast<rotateBackClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateBackClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateBackCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateBackCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateFrontClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateFrontClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateFrontCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateFrontCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateTopClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateTopClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateTopCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateTopCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateBottomClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateBottomClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateBottomCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateBottomCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateRightClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateRightClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateRightCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateRightCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateLeftClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateLeftClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<rotateLeftCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<rotateLeftCounterClockWise>(a) << endl;
+            if(dynamic_pointer_cast<RotateBackClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateBackClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateBackCounterClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateBackCounterClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateFrontClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateFrontClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateFrontCounterClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateFrontCounterClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateTopClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateTopClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateTopCounterClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateTopCounterClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateBottomClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateBottomClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateBottomCounterClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateBottomCounterClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateRightClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateRightClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateRightCounterClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateRightCounterClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateLeftClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateLeftClockWise>(a) << endl;
+            else if(dynamic_pointer_cast<RotateLeftCounterClockWise>(a)!=nullptr)
+                cout << *dynamic_pointer_cast<RotateLeftCounterClockWise>(a) << endl;
         }
 };
 

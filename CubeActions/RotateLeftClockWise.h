@@ -10,8 +10,8 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __ROTATEBACKCOUNTERCLOCKWISE_H__
-#define __ROTATEBACKCOUNTERCLOCKWISE_H__
+#ifndef __ROTATELEFTCLOCKWISE_H__
+#define __ROTATELEFTCLOCKWISE_H__
 
 #include "../Search/Action.h"
 #include "../RubiksCube.h"
@@ -20,32 +20,32 @@
 using namespace std;
 
 /*==============================================================
-| class: rotateBackCounterClockWise - squares is the number of 
-| squares to swap between the faces adjacent to the one you're 
+| class: rotateLeftClockWise - squares is the number of squares
+| to swap between the faces adjacent to the one you're 
 | rotating, for examples, in the 3x3 cube, squares can't be
 | diferent from 1, since it does not make sense to rotate
 | beyond the middle
 ==============================================================*/
-class rotateBackCounterClockWise: public Action<RubiksCube>
+class RotateLeftClockWise: public Action<RubiksCube>
 {
     private:
         int _squares;
 
     public:
-        rotateBackCounterClockWise(int squares): Action<RubiksCube>()
+        RotateLeftClockWise(int squares): Action<RubiksCube>()
         {   
             _squares = squares;
         }
-
-        RubiksCube execute(RubiksCube cube)
+        
+        RubiksCube execute(RubiksCube cube) override
         {
-            cube.rotateFaceCounterClockWise(BACK, _squares);
+            cube.rotateFaceClockWise(LEFT, _squares);
             return cube;
         }
 
-        friend ostream& operator<<(ostream& os, const rotateBackCounterClockWise& r)
+        friend ostream& operator<<(ostream& os, const RotateLeftClockWise& r)
         {
-            os << "Back Counter Clock " << r._squares;
+            os << "Left Clock " << r._squares;
             return os;
         }
 };
