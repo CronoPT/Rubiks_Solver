@@ -16,7 +16,6 @@
 #include "Action.h"
 #include "Node.h"
 #include <vector>
-#include <memory>
 
 using namespace std;
 
@@ -34,9 +33,9 @@ class Problem
 
     public:
         Problem(C initial):
-        _initial(initial)
+          _initial(initial)
         {
-            // _initial = initial; 
+
         }
 
         C getInitialState() const { return _initial; }

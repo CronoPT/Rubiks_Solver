@@ -16,17 +16,19 @@
 | function: RubiksCube Constructor - faces indexing must
 | agree with the defines in the .h file
 ==============================================================*/
-RubiksCube::RubiksCube(int n, vector<Face> faces)
+RubiksCube::RubiksCube(int n, vector<Face> faces):
+  _faces(faces),
+  _n(n)
 {
-    _faces = faces;
-    _n = n;
+
 }
 
 RubiksCube::RubiksCube(int n, Face front, Face bottom, \
-  Face right, Face left, Face top, Face back)
+  Face right, Face left, Face top, Face back):
+  _faces({front, bottom, right, left, top, back}),
+  _n(n)
 {
-    _faces = {front, bottom, right, left, top, back};
-    _n = n;
+
 }
 
 /*==============================================================
@@ -206,10 +208,10 @@ void RubiksCube::rotateFrontClockWise(int squares)
         turning_line   = _faces[RIGHT].getColumn(start_limit);
         _faces[RIGHT].setColumn(start_limit, _faces[TOP].getLine(end_limit));
         turning_column = _faces[BOTTOM].getLine(start_limit);
-        _faces[BOTTOM].setLine(start_limit, turning_line);
+        _faces[BOTTOM].setLineBackwards(start_limit, turning_line);
         turning_line   = _faces[LEFT].getColumn(end_limit);
         _faces[LEFT].setColumn(end_limit, turning_column);
-        _faces[TOP].setLine(end_limit, turning_line);
+        _faces[TOP].setLineBackwards(end_limit, turning_line);
     }
 }
 
@@ -229,11 +231,11 @@ void RubiksCube::rotateBackClockWise(int squares)
         end_limit   = _n-i-1;
 
         turning_line   = _faces[LEFT].getColumn(start_limit);
-        _faces[LEFT].setColumn(start_limit, _faces[TOP].getLine(start_limit));
+        _faces[LEFT].setColumnBackwards(start_limit, _faces[TOP].getLine(start_limit));
         turning_column = _faces[BOTTOM].getLine(end_limit);
         _faces[BOTTOM].setLine(end_limit, turning_line);
         turning_line   = _faces[RIGHT].getColumn(end_limit);
-        _faces[RIGHT].setColumn(end_limit, turning_column);
+        _faces[RIGHT].setColumnBackwards(end_limit, turning_column);
         _faces[TOP].setLine(start_limit, turning_line);
     }
 }
@@ -299,9 +301,9 @@ void RubiksCube::rotateRightClockWise(int squares)
         end_limit   = _n-i-1;
 
         turning_column_1 = _faces[BACK].getColumn(start_limit);
-        _faces[BACK].setColumn(start_limit, _faces[TOP].getColumn(end_limit));
+        _faces[BACK].setColumnBackwards(start_limit, _faces[TOP].getColumn(end_limit));
         turning_column_2 = _faces[BOTTOM].getColumn(end_limit);
-        _faces[BOTTOM].setColumn(end_limit, turning_column_1);
+        _faces[BOTTOM].setColumnBackwards(end_limit, turning_column_1);
         turning_column_1 = _faces[FRONT].getColumn(end_limit);
         _faces[FRONT].setColumn(end_limit, turning_column_2);
         _faces[TOP].setColumn(end_limit, turning_column_1);
@@ -328,8 +330,8 @@ void RubiksCube::rotateLeftClockWise(int squares)
         turning_column_2 = _faces[BOTTOM].getColumn(start_limit);
         _faces[BOTTOM].setColumn(start_limit, turning_column_1);
         turning_column_1 = _faces[BACK].getColumn(end_limit);
-        _faces[BACK].setColumn(end_limit, turning_column_2);
-        _faces[TOP].setColumn(start_limit, turning_column_1);
+        _faces[BACK].setColumnBackwards(end_limit, turning_column_2);
+        _faces[TOP].setColumnBackwards(start_limit, turning_column_1);
     }
 }
 
@@ -349,11 +351,11 @@ void RubiksCube::rotateFrontCounterClockWise(int squares)
         end_limit   = _n-i-1;
 
         turning_line   = _faces[LEFT].getColumn(end_limit);
-        _faces[LEFT].setColumn(end_limit, _faces[TOP].getLine(end_limit));
+        _faces[LEFT].setColumnBackwards(end_limit, _faces[TOP].getLine(end_limit));
         turning_column = _faces[BOTTOM].getLine(start_limit);
         _faces[BOTTOM].setLine(start_limit, turning_line);
         turning_line   = _faces[RIGHT].getColumn(start_limit);
-        _faces[RIGHT].setColumn(start_limit, turning_column);
+        _faces[RIGHT].setColumnBackwards(start_limit, turning_column);
         _faces[TOP].setLine(end_limit, turning_line);
     }
 }
@@ -376,10 +378,10 @@ void RubiksCube::rotateBackCounterClockWise(int squares)
         turning_line   = _faces[RIGHT].getColumn(end_limit);
         _faces[RIGHT].setColumn(end_limit, _faces[TOP].getLine(start_limit));
         turning_column = _faces[BOTTOM].getLine(end_limit);
-        _faces[BOTTOM].setLine(end_limit, turning_line);
+        _faces[BOTTOM].setLineBackwards(end_limit, turning_line);
         turning_line   = _faces[LEFT].getColumn(start_limit);
         _faces[LEFT].setColumn(start_limit, turning_column);
-        _faces[TOP].setLine(start_limit, turning_line);
+        _faces[TOP].setLineBackwards(start_limit, turning_line);
     }
 }
 
@@ -448,8 +450,8 @@ void RubiksCube::rotateRightCounterClockWise(int squares)
         turning_column_2 = _faces[BOTTOM].getColumn(end_limit);
         _faces[BOTTOM].setColumn(end_limit, turning_column_1);
         turning_column_1 = _faces[BACK].getColumn(start_limit);
-        _faces[BACK].setColumn(start_limit, turning_column_2);
-        _faces[TOP].setColumn(end_limit, turning_column_1);
+        _faces[BACK].setColumnBackwards(start_limit, turning_column_2);
+        _faces[TOP].setColumnBackwards(end_limit, turning_column_1);
     }
 }
 
@@ -469,9 +471,9 @@ void RubiksCube::rotateLeftCounterClockWise(int squares)
         end_limit   = _n-i-1;
 
         turning_column_1 = _faces[BACK].getColumn(end_limit);
-        _faces[BACK].setColumn(end_limit, _faces[TOP].getColumn(start_limit));
+        _faces[BACK].setColumnBackwards(end_limit, _faces[TOP].getColumn(start_limit));
         turning_column_2 = _faces[BOTTOM].getColumn(start_limit);
-        _faces[BOTTOM].setColumn(start_limit, turning_column_1);
+        _faces[BOTTOM].setColumnBackwards(start_limit, turning_column_1);
         turning_column_1 = _faces[FRONT].getColumn(start_limit);
         _faces[FRONT].setColumn(start_limit, turning_column_2);
         _faces[TOP].setColumn(start_limit, turning_column_1);

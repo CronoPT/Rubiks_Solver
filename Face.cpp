@@ -15,10 +15,11 @@
 /*==============================================================
 | function: Face Constructor
 ==============================================================*/
-Face::Face(int n, vector<char> squares)
+Face::Face(int n, vector<char> squares):
+  _squares(squares),
+  _n(n)
 {
-    _squares = squares;
-    _n = n;
+
 }
 
 /*==============================================================
@@ -78,6 +79,15 @@ void Face::setColumn(int c, vector<char> new_column)
 }
 
 /*==============================================================
+| function: setColumnBackwards
+==============================================================*/
+void Face::setColumnBackwards(int c, vector<char> new_column)
+{
+    for(int i=0; i<_n; i++)
+        setPosition(i, c, new_column[_n-i-1]);
+}
+
+/*==============================================================
 | function: getLine
 ==============================================================*/
 vector<char> Face::getLine(int l) const
@@ -97,6 +107,15 @@ void Face::setLine(int l, vector<char> new_line)
 {
     for(int i=0; i<_n; i++)
         setPosition(l, i, new_line[i]);
+}
+
+/*==============================================================
+| function: setLineBackwards\
+==============================================================*/
+void Face::setLineBackwards(int l, vector<char> new_line)
+{
+    for(int i=0; i<_n; i++)
+        setPosition(l, i, new_line[_n-i-1]);
 }
 
 /*==============================================================

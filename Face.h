@@ -44,8 +44,10 @@ class Face
         void  setPosition(int l, int c, char newSquare);
         vector<char> getColumn(int c) const;
         void  setColumn(int c, vector<char> squares);
+        void  setColumnBackwards(int c, vector<char> squares);
         vector<char> getLine(int l) const;
         void  setLine(int l, vector<char> squares);
+        void setLineBackwards(int l, vector<char> squares);
         void  rotateClockWise();
         void  rotateCounterClockWise();
         bool  allSameColor();

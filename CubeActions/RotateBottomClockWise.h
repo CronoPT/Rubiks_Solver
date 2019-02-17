@@ -15,7 +15,6 @@
 
 #include "../Search/Action.h"
 #include "../RubiksCube.h"
-#include <iostream>
 
 using namespace std;
 

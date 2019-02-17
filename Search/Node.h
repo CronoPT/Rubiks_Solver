@@ -35,10 +35,7 @@ class Node
           _action(action),
           _path_cost(path_cost)
         {
-            // _state     = state;
-            // _parent    = parent;
-            // _action    = action;
-            // _path_cost = path_cost;
+
         }
 
         C getState() const { return _state; }

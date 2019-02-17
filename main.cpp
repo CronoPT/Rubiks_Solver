@@ -10,10 +10,7 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#include "Face.h"
-#include "RubiksCube.h"
 #include "Cubing.h"
-#include "Search/Action.h"
 
 /*
     Including both the .cpp and .h files
@@ -24,22 +21,6 @@ to a template class
 #include "Search/AStarSearch.h"
 #include "Search/AStarSearch.cpp"
 
-#include "CubeActions/RotateBackClockWise.h"
-#include "CubeActions/RotateBackCounterClockWise.h"
-#include "CubeActions/RotateFrontClockWise.h"
-#include "CubeActions/RotateFrontCounterClockWise.h"
-#include "CubeActions/RotateTopClockWise.h"
-#include "CubeActions/RotateTopCounterClockWise.h"
-#include "CubeActions/RotateBottomClockWise.h"
-#include "CubeActions/RotateBottomCounterClockWise.h"
-#include "CubeActions/RotateRightClockWise.h"
-#include "CubeActions/RotateRightCounterClockWise.h"
-#include "CubeActions/RotateLeftClockWise.h"
-#include "CubeActions/RotateLeftCounterClockWise.h"
-
-#include <vector>
-#include <memory>
-
 using namespace std;
 
 RubiksCube foo();
@@ -48,8 +29,7 @@ RubiksCube doneCube();
 int main()
 {   
        RubiksCube my_cube = foo();
-       
-       //my_cube.rotateFaceCounterClockWise(TOP, 1);
+
        Cubing problem(my_cube);
        AStarSearch<RubiksCube> algorithm;
        vector<shared_ptr<Action<RubiksCube>>> solution = algorithm.execute(&problem);
@@ -75,34 +55,34 @@ RubiksCube foo()
 {
         // front | bottom | right | left | top | back
 
-    vector<char> aux = {GREEN, ORANGE, ORANGE,
-                        GREEN, WHITE, BLUE, 
-                        WHITE, WHITE, BLUE};
+    vector<char> aux = {YELLOW, YELLOW, GREEN,
+                        WHITE, WHITE, WHITE, 
+                        RED, RED, RED};
     Face front_face(3, aux);
     
-    aux = {BLUE, BLUE, BLUE, 
-           RED, YELLOW, YELLOW, 
-           RED, GREEN, GREEN};
+    aux = {WHITE, ORANGE, ORANGE, 
+           WHITE, YELLOW, YELLOW, 
+           BLUE, RED, RED};
     Face back_face(3, aux);
 
-    aux = {GREEN, YELLOW, YELLOW, 
+    aux = {RED, YELLOW, GREEN, 
            ORANGE, ORANGE, GREEN, 
-           ORANGE, ORANGE, GREEN};
+           WHITE, WHITE, YELLOW};
     Face right_face(3, aux);
 
-    aux = {WHITE, RED, WHITE, 
-           BLUE, RED, WHITE, 
-           YELLOW, RED, BLUE};
+    aux = {WHITE, ORANGE, ORANGE, 
+           ORANGE, RED, RED, 
+           YELLOW, YELLOW, YELLOW};
     Face left_face(3, aux);
 
-    aux = {RED, RED, RED, 
-           YELLOW, GREEN, GREEN,
-           RED, WHITE, WHITE};
+    aux = {BLUE, BLUE, ORANGE, 
+           GREEN, GREEN, RED,
+           GREEN, GREEN, WHITE};
     Face top_face(3, aux);
 
-    aux = {ORANGE, BLUE, YELLOW, 
-           WHITE, BLUE, YELLOW, 
-           ORANGE, ORANGE, YELLOW};
+    aux = {BLUE, BLUE, BLUE, 
+           BLUE, BLUE, BLUE, 
+           GREEN, GREEN, ORANGE};
     Face bottom_face(3, aux);
 
     vector<Face> faces = {front_face, bottom_face, right_face, left_face, top_face, back_face};
