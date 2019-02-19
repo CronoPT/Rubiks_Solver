@@ -46,22 +46,22 @@ class Node
 
         double getPathCost() const  { return _path_cost; }
 
-        friend bool operator<(const Node<C>& node_1, const Node<C>& node_2)
+        bool operator<(const Node<C>& other)
         {
-            return node_1.getPathCost() < node_2.getPathCost();
+            return getPathCost() < other.getPathCost();
         }
 
-        friend bool operator>(const Node<C>& node_1, const Node<C>& node_2)
+        bool operator>(const Node<C>& other)
         {
-            return node_1.getPathCost() > node_2.getPathCost();
+            return getPathCost() > other.getPathCost();
         }
 
-        friend bool operator<(const Node<C>& node_1, const shared_ptr<Node<C>>& node_2)
+        friend bool operator<(const shared_ptr<Node<C>>& node_1, const shared_ptr<Node<C>>& node_2)
         {
             return node_1->getPathCost() < node_2->getPathCost();
         }
 
-        friend bool operator>(const Node<C>& node_1, const shared_ptr<Node<C>>& node_2)
+        friend bool operator>(const shared_ptr<Node<C>>& node_1, const shared_ptr<Node<C>>& node_2)
         {
             return node_1->getPathCost() > node_2->getPathCost();
         }

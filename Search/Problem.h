@@ -31,13 +31,11 @@ class Problem
     private:
         C _initial;
 
-    public:
+    protected:
         Problem(C initial):
-          _initial(initial)
-        {
+          _initial(initial){}
 
-        }
-
+    public:
         C getInitialState() const { return _initial; }
 
         virtual vector<shared_ptr<Action<C>>> actions(C state) = 0; //virtual function
@@ -60,8 +58,6 @@ class Problem
         {
             return algorithm->execute(&this);
         }
-
-        virtual void printAction(shared_ptr<Action<C>> a) = 0;
 };
 
 #endif

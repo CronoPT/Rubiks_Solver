@@ -38,7 +38,7 @@ int main()
 
        for(shared_ptr<Action<RubiksCube>> a : solution)
        {
-              problem.printAction(a);
+              cout << *a << endl;
        }
     
 

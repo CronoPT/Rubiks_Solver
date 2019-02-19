@@ -42,9 +42,14 @@ class RotateBackClockWise: public Action<RubiksCube>
             return cube;
         }
 
+        void dumpTo(ostream& os) const override
+        {
+            os << "Back Clock " << _squares;
+        }
+
         friend ostream& operator<<(ostream& os, const RotateBackClockWise& r)
         {
-            os << "Back Clock " << r._squares;
+            r.dumpTo(os);
             return os;
         }
 };

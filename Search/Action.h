@@ -27,7 +27,13 @@ class Action
     public:
         virtual C execute(C state) = 0; //virtual function
 
-        friend ostream& operator<<(ostream& os, const Action<C>& r) {}
+        virtual void dumpTo(ostream& os) const = 0;
+
+        friend ostream& operator<<(ostream& os, const Action<C>& a) 
+        {
+            a.dumpTo(os);
+            return os;
+        }
 };
 
 #endif

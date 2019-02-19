@@ -95,34 +95,6 @@ class Cubing: public Problem<RubiksCube>
                     }
             return n*n*6*4 - to_subtract;
         }
-
-        void printAction(shared_ptr<Action<RubiksCube>> a)
-        {
-            if(dynamic_pointer_cast<RotateBackClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateBackClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateBackCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateBackCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateFrontClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateFrontClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateFrontCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateFrontCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateTopClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateTopClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateTopCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateTopCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateBottomClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateBottomClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateBottomCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateBottomCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateRightClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateRightClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateRightCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateRightCounterClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateLeftClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateLeftClockWise>(a) << endl;
-            else if(dynamic_pointer_cast<RotateLeftCounterClockWise>(a)!=nullptr)
-                cout << *dynamic_pointer_cast<RotateLeftCounterClockWise>(a) << endl;
-        }
 };
 
 #endif
