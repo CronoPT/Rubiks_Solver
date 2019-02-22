@@ -40,21 +40,22 @@ class Problem
 
         virtual vector<shared_ptr<Action<C>>> actions(C state) = 0; //virtual function
 
-        C result(C state, shared_ptr<Action<C>> action)
+        virtual C result(C state, shared_ptr<Action<C>> action)
         {
             return action->execute(state);
         }
 
         virtual bool goalTest(C state) = 0; //virtual function
 
-        double pathCost(double cost, C state_1, shared_ptr<Action<C>> action, C state_2)
-        {
+        virtual double pathCost(double cost, C state_1, shared_ptr<Action<C>> action, C state_2)
+        {   
+            //default: one more step
             return cost+1;
         }
 
-        virtual double heuristic(C state) = 0;
+        virtual double heuristic(C state) const { return 0; }
 
-        vector<shared_ptr<Action<C>>> solve(SearchingAlgorithm<C>* algorithm)
+        vector<shared_ptr<Action<C>>> solve(SearchingAlgorithm<C>* algorithm) const
         {
             return algorithm->execute(&this);
         }

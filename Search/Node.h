@@ -26,17 +26,25 @@ class Node
         shared_ptr<Node<C>>   _parent;
         shared_ptr<Action<C>> _action;
         double     _path_cost;
+        double     _heuristic;
 
     public:
+        Node(C state, shared_ptr<Node<C>> parent, 
+          shared_ptr<Action<C>> action, double path_cost,
+          double heuristic):
+          _state(state),
+          _parent(parent),
+          _action(action),
+          _path_cost(path_cost), 
+          _heuristic(heuristic){}
+
         Node(C state, shared_ptr<Node<C>> parent, 
           shared_ptr<Action<C>> action, double path_cost):
           _state(state),
           _parent(parent),
           _action(action),
-          _path_cost(path_cost)
-        {
-
-        }
+          _path_cost(path_cost), 
+          _heuristic(0) {}
 
         C getState() const { return _state; }
 
@@ -46,24 +54,28 @@ class Node
 
         double getPathCost() const  { return _path_cost; }
 
+        double getHeuristic() const { return _heuristic; }
+
         bool operator<(const Node<C>& other)
         {
-            return getPathCost() < other.getPathCost();
+            return getPathCost() + getHeuristic() < 
+                   other.getPathCost() + other.getHeuristic();
         }
 
         bool operator>(const Node<C>& other)
         {
-            return getPathCost() > other.getPathCost();
+            return getPathCost() + getHeuristic() > 
+                   other.getPathCost() + other.getHeuristic();
         }
 
         friend bool operator<(const shared_ptr<Node<C>>& node_1, const shared_ptr<Node<C>>& node_2)
         {
-            return node_1->getPathCost() < node_2->getPathCost();
+            return *node_1 < *node_2;
         }
 
         friend bool operator>(const shared_ptr<Node<C>>& node_1, const shared_ptr<Node<C>>& node_2)
         {
-            return node_1->getPathCost() > node_2->getPathCost();
+            return *node_1 > *node_2;
         }
 };
 

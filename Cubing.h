@@ -37,7 +37,7 @@ class Cubing: public Problem<RubiksCube>
     public:
         Cubing(RubiksCube cube): Problem<RubiksCube>(cube) {}
 
-        vector<shared_ptr<Action<RubiksCube>>> actions(RubiksCube cube)
+        vector<shared_ptr<Action<RubiksCube>>> actions(RubiksCube cube) override
         {   
             vector<shared_ptr<Action<RubiksCube>>> res;
             for(int i=1; i<=(int)cube.getN()/2; i++)
@@ -59,41 +59,37 @@ class Cubing: public Problem<RubiksCube>
             return res;
         }
 
-        bool goalTest(RubiksCube cube)
+        bool goalTest(RubiksCube cube) override
         {
             return cube.solved();
         }
 
-        double pathCost(double cost, RubiksCube state_1, Action<RubiksCube>* action, RubiksCube state_2)
+        double heuristic(RubiksCube cube) const override
         {
-            return cost + 1;
-        }
+            return 0;
+            // if(cube.solved())
+            //     return 0;
 
-        double heuristic(RubiksCube cube)
-        {
-            if(cube.solved())
-                return 0;
-
-            int to_subtract = 0;
-            int n = cube.getN();
-            for(Face face : cube.getFaces())
-                for(int l=0; l<n; l++)
-                    for(int c=0; c<n; c++)
-                    {
-                        if(c > 1)
-                            if(face.getPosition(l, c) == face.getPosition(l, c-1))
-                                to_subtract++;
-                        if(c < n-1)
-                            if(face.getPosition(l, c) == face.getPosition(l, c+1))
-                                to_subtract++;
-                        if(l > 1)
-                            if(face.getPosition(l, c) == face.getPosition(l-1, c))
-                                to_subtract++;
-                        if(l < n-1)
-                            if(face.getPosition(l, c) == face.getPosition(l+1, c))
-                                to_subtract++;
-                    }
-            return n*n*6*4 - to_subtract;
+            // int to_subtract = 0;
+            // int n = cube.getN();
+            // for(Face face : cube.getFaces())
+            //     for(int l=0; l<n; l++)
+            //         for(int c=0; c<n; c++)
+            //         {
+            //             if(c > 1)
+            //                 if(face.getPosition(l, c) == face.getPosition(l, c-1))
+            //                     to_subtract++;
+            //             if(c < n-1)
+            //                 if(face.getPosition(l, c) == face.getPosition(l, c+1))
+            //                     to_subtract++;
+            //             if(l > 1)
+            //                 if(face.getPosition(l, c) == face.getPosition(l-1, c))
+            //                     to_subtract++;
+            //             if(l < n-1)
+            //                 if(face.getPosition(l, c) == face.getPosition(l+1, c))
+            //                     to_subtract++;
+            //         }
+            // return n*n*6*4 - to_subtract;
         }
 };
 

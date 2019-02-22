@@ -19,7 +19,9 @@ template<typename C>
 vector<shared_ptr<Action<C>>> AStarSearch<C>::execute(Problem<C>* problem)
 {
     shared_ptr<Node<C>> node = make_shared<Node<C>>(problem->getInitialState(), 
-                                                    nullptr, nullptr, 0);
+                                                    nullptr, nullptr, 0,
+                                                    problem->heuristic(
+                                                    problem->getInitialState()));
     priority_queue<shared_ptr<Node<C>>, 
                    vector<shared_ptr<Node<C>>>, 
                    std::greater<shared_ptr<Node<C>>>> frontier;
@@ -64,11 +66,13 @@ shared_ptr<Node<C>> AStarSearch<C>::childNode(Problem<C>* problem,
 {
     C state = problem->result(parent->getState(), action);
 
-    double path_cost = problem->pathCost(parent->getPathCost(), \
+    double path_cost = problem->pathCost(parent->getPathCost(),
                                          parent->getState(), 
                                          action, state);
 
-    return make_shared<Node<C>>(state, parent, action, path_cost);
+    double heuristic = problem->heuristic(state);
+
+    return make_shared<Node<C>>(state, parent, action, path_cost, heuristic);
 
 }
 
