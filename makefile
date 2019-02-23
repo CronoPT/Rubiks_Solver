@@ -13,7 +13,7 @@ Face.o: Face.h Face.cpp
 RubiksCube.o: RubiksCube.h RubiksCube.cpp
 	$(CC) $(CFLAGS) -c RubiksCube.cpp
 
-AStarSearch.o: Search/AStarSearch.h Search/AStarSearch.cpp
+AStarSearch.o: Search/AStarSearch.h Search/AStarSearch.cpp Search/Node.h Search/Action.h Search/Problem.h
 	$(CC) $(CFLAGS) -c Search/AStarSearch.cpp
 
 clean:
