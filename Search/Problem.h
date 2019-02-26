@@ -57,7 +57,7 @@ class Problem
 
         vector<shared_ptr<Action<C>>> solve(SearchingAlgorithm<C>* algorithm) const
         {
-            return algorithm->execute(&this);
+            return algorithm->execute(this);
         }
 };
 
