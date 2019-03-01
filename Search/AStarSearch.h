@@ -24,7 +24,7 @@ using namespace std;
 
 template <typename C>
 class AStarSearch: public SearchingAlgorithm<C>
-{    
+{
     public:
         vector<shared_ptr<Action<C>>> execute(Problem<C>* problem) override;
 

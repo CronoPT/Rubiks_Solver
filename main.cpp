@@ -30,8 +30,6 @@ int main()
 {   
        RubiksCube my_cube = foo();
 
-       cout << my_cube << endl;
-
        Cubing problem(my_cube);
        AStarSearch<RubiksCube> algorithm;
        vector<shared_ptr<Action<RubiksCube>>> solution = algorithm.execute(&problem);
