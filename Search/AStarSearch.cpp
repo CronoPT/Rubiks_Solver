@@ -25,11 +25,11 @@ vector<shared_ptr<Action<C>>> AStarSearch<C>::execute(Problem<C>* problem)
     priority_queue<shared_ptr<Node<C>>, 
                    vector<shared_ptr<Node<C>>>, 
                    std::greater<shared_ptr<Node<C>>>> frontier;
-    //set<C> explored;
+    set<C> explored;
     vector<shared_ptr<Action<C>>> actions;
 
     frontier.push(node);
-    //explored.insert(node->getState());
+    explored.insert(node->getState());
     int depth = 0;
     while(!frontier.empty())
     {
@@ -39,18 +39,17 @@ vector<shared_ptr<Action<C>>> AStarSearch<C>::execute(Problem<C>* problem)
         if( problem->goalTest(node->getState()) )  
             return solution(node); /*builds a vector with the actions*/
         
-        //explored.insert(node->getState());
+        explored.insert(node->getState());
 
         /*expansion*/
         for(shared_ptr<Action<C>> action : problem->actions(node->getState()))
         {
             shared_ptr<Node<C>> child = childNode(problem, action, node);
 
-            //if( explored.count(child->getState())==0 )
-            //{    
-            frontier.push(child);
-                //explored.insert(child->getState());
-            //}
+            if( explored.count(child->getState())==0 )
+            {    
+                frontier.push(child);
+            }
         }
     } 
     //throw some exception indicating the problem has no solution        
