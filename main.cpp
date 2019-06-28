@@ -53,47 +53,41 @@ int main()
 
 RubiksCube foo()
 {
-        // front | bottom | right | left | top | back
+	// front | bottom | right | left | top | back
 
-    vector<char> aux = {YELLOW, YELLOW, GREEN,
-                        WHITE, WHITE, WHITE, 
-                        RED, RED, RED};
-    Face front_face(3, aux);
+    vector<char> aux = {WHITE,  YELLOW,
+                        YELLOW, WHITE };
+    Face front_face(2, aux);
     
-    aux = {WHITE, ORANGE, ORANGE, 
-           WHITE, YELLOW, YELLOW, 
-           BLUE, RED, RED};
-    Face back_face(3, aux);
+    aux = {ORANGE, BLUE, 
+           RED,    RED };
+    Face back_face(2, aux);
 
-    aux = {RED, YELLOW, GREEN, 
-           ORANGE, ORANGE, GREEN, 
-           WHITE, WHITE, YELLOW};
-    Face right_face(3, aux);
+    aux = {RED,   GREEN, 
+           GREEN, BLUE };
+    Face right_face(2, aux);
 
-    aux = {WHITE, ORANGE, ORANGE, 
-           ORANGE, RED, RED, 
-           YELLOW, YELLOW, YELLOW};
-    Face left_face(3, aux);
+    aux = {RED,   ORANGE, 
+           GREEN, ORANGE };
+    Face left_face(2, aux);
 
-    aux = {BLUE, BLUE, ORANGE, 
-           GREEN, GREEN, RED,
-           GREEN, GREEN, WHITE};
-    Face top_face(3, aux);
+    aux = {YELLOW, YELLOW, 
+           BLUE,   GREEN };
+    Face top_face(2, aux);
 
-    aux = {BLUE, BLUE, BLUE, 
-           BLUE, BLUE, BLUE, 
-           GREEN, GREEN, ORANGE};
-    Face bottom_face(3, aux);
+    aux = {BLUE, ORANGE, 
+           WHITE, WHITE};
+    Face bottom_face(2, aux);
 
     vector<Face> faces = {front_face, bottom_face, right_face, left_face, top_face, back_face};
-    RubiksCube my_cube(3, faces);
+    RubiksCube my_cube(2, faces);
     
     return my_cube;
 }
 
 RubiksCube doneCube()
 {
-        // front | bottom | right | left | top | back
+	// front | bottom | right | left | top | back
 
     vector<char> aux = {WHITE, WHITE, WHITE,
                         WHITE, WHITE, WHITE, 

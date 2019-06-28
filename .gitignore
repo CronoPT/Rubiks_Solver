@@ -3,3 +3,4 @@ teste.cpp
 *.out
 *.o
 rubikSolver
+.vscode
