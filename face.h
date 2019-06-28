@@ -16,8 +16,6 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
-
 #define WHITE  'W'
 #define RED    'R'
 #define GREEN  'G'
@@ -25,35 +23,40 @@ using namespace std;
 #define BLUE   'B'
 #define YELLOW 'Y'
 
+namespace cubing 
+{
+
 /*==============================================================
 | class: Face - the representation of a Rubik's cube face of
 | size _n. For example a standart 3x3 Rubik's cube has 6 
 | faces in wich _n = 3.
 ==============================================================*/
-class Face
+class face
 {  
     private:
-        vector<char> _squares;
+        std::vector<char> _squares;
         int _n;
 
     public:
-        Face(int n, vector<char> squares);
-        int   getN() const;
-        char  getPositionByIndex(int index) const;
-        char  getPosition(int l, int c) const;
-        void  setPosition(int l, int c, char newSquare);
-        vector<char> getColumn(int c) const;
-        void  setColumn(int c, vector<char> squares);
-        void  setColumnBackwards(int c, vector<char> squares);
-        vector<char> getLine(int l) const;
-        void  setLine(int l, vector<char> squares);
-        void setLineBackwards(int l, vector<char> squares);
-        void  rotateClockWise();
-        void  rotateCounterClockWise();
-        bool  allSameColor();
-        friend ostream& operator<<(ostream& os, const Face& face);
-        friend bool     operator==(const Face& face_1, const Face& face_2);
-        friend bool     operator!=(const Face& face_1, const Face& face_2);   
+        face(int n, std::vector<char> squares);
+        int  N() const;
+        char position_by_index(int index) const;
+        char position(int l, int c) const;
+        void position(int l, int c, char newSquare);
+        std::vector<char> column(int c) const;
+        void column(int c, std::vector<char> squares);
+        void column_backwards(int c, std::vector<char> squares);
+        std::vector<char> line(int l) const;
+        void line(int l, std::vector<char> squares);
+        void line_backwards(int l, std::vector<char> squares);
+        void rotate_clock_wise();
+        void rotate_counter_clock_wise();
+        bool all_same_color();
+        friend std::ostream& operator<<(std::ostream& os, const face& face);
+        friend bool operator==(const face& face_1, const face& face_2);
+        friend bool operator!=(const face& face_1, const face& face_2);   
 };
+
+} //cubing
 
 #endif

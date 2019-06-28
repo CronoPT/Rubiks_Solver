@@ -10,12 +10,12 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#include "Face.h"
+#include "face.h"
 
 /*==============================================================
 | function: Face Constructor
 ==============================================================*/
-Face::Face(int n, vector<char> squares):
+cubing::face::face(int n, std::vector<char> squares):
   _squares(squares),
   _n(n)
 {
@@ -25,7 +25,7 @@ Face::Face(int n, vector<char> squares):
 /*==============================================================
 | function: getN
 ==============================================================*/
-int Face::getN() const
+int cubing::face::N() const
 {
     return _n;
 }
@@ -33,7 +33,7 @@ int Face::getN() const
 /*==============================================================
 | function: getPositionByIndex
 ==============================================================*/
-char Face::getPositionByIndex(int index) const
+char cubing::face::position_by_index(int index) const
 {
     return _squares[index];
 }
@@ -42,7 +42,7 @@ char Face::getPositionByIndex(int index) const
 | function: getPosition - get the contents, i.e color, of
 | a given position
 ==============================================================*/
-char Face::getPosition(int l, int c) const
+char cubing::face::position(int l, int c) const
 {
     return _squares[l*_n + c];
 }
@@ -51,7 +51,7 @@ char Face::getPosition(int l, int c) const
 | function: setPosition - set the contents, i.e color, of
 | a given position
 ==============================================================*/
-void Face::setPosition(int l, int c, char new_square)
+void cubing::face::position(int l, int c, char new_square)
 {
     _squares[l*_n + c] = new_square;
 }
@@ -59,12 +59,12 @@ void Face::setPosition(int l, int c, char new_square)
 /*==============================================================
 | function: getColumn
 ==============================================================*/
-vector<char> Face::getColumn(int c) const
+std::vector<char> cubing::face::column(int c) const
 {
-    vector<char> column(_n, 0);
+    std::vector<char> column(_n, 0);
 
     for(int i=0; i<_n; i++)
-        column[i] = getPosition(i, c);
+        column[i] = position(i, c);
 
     return column;
 }
@@ -72,30 +72,30 @@ vector<char> Face::getColumn(int c) const
 /*==============================================================
 | function: setColumn
 ==============================================================*/
-void Face::setColumn(int c, vector<char> new_column)
+void cubing::face::column(int c, std::vector<char> new_column)
 {
     for(int i=0; i<_n; i++)
-        setPosition(i, c, new_column[i]);
+        position(i, c, new_column[i]);
 }
 
 /*==============================================================
 | function: setColumnBackwards
 ==============================================================*/
-void Face::setColumnBackwards(int c, vector<char> new_column)
+void cubing::face::column_backwards(int c, std::vector<char> new_column)
 {
     for(int i=0; i<_n; i++)
-        setPosition(i, c, new_column[_n-i-1]);
+        position(i, c, new_column[_n-i-1]);
 }
 
 /*==============================================================
 | function: getLine
 ==============================================================*/
-vector<char> Face::getLine(int l) const
+std::vector<char> cubing::face::line(int l) const
 {
-    vector<char> line(_n, 0);
+    std::vector<char> line(_n, 0);
 
     for(int i=0; i<_n; i++)
-        line[i] = getPosition(l, i);
+        line[i] = position(l, i);
 
     return line;
 }
@@ -103,28 +103,28 @@ vector<char> Face::getLine(int l) const
 /*==============================================================
 | function: setLine
 ==============================================================*/
-void Face::setLine(int l, vector<char> new_line)
+void cubing::face::line(int l, std::vector<char> new_line)
 {
     for(int i=0; i<_n; i++)
-        setPosition(l, i, new_line[i]);
+        position(l, i, new_line[i]);
 }
 
 /*==============================================================
 | function: setLineBackwards\
 ==============================================================*/
-void Face::setLineBackwards(int l, vector<char> new_line)
+void cubing::face::line_backwards(int l, std::vector<char> new_line)
 {
     for(int i=0; i<_n; i++)
-        setPosition(l, i, new_line[_n-i-1]);
+        position(l, i, new_line[_n-i-1]);
 }
 
 /*==============================================================
 | function: rotateClockWise
 ==============================================================*/
-void Face::rotateClockWise()
+void cubing::face::rotate_clock_wise()
 {
     int size = _n*_n;
-    vector<char> old_face(size, 0);
+    std::vector<char> old_face(size, 0);
 
     for(int i=0; i<size; i++)
         old_face[i] = _squares[i];
@@ -135,17 +135,17 @@ void Face::rotateClockWise()
         {
             new_l = c;
             new_c = _n-l-1;
-            setPosition(new_l, new_c, old_face[l*_n + c]);
+            position(new_l, new_c, old_face[l*_n + c]);
         }
 }
 
 /*==============================================================
 | function: rotateCounterClockWise
 ==============================================================*/
-void Face::rotateCounterClockWise()
+void cubing::face::rotate_counter_clock_wise()
 {
     int size = _n*_n;
-    vector<char> old_face(size, 0);
+    std::vector<char> old_face(size, 0);
 
     for(int i=0; i<size; i++)
         old_face[i] = _squares[i];
@@ -156,14 +156,14 @@ void Face::rotateCounterClockWise()
         {
             new_l = _n-c-1;
             new_c = l;
-            setPosition(new_l, new_c, old_face[l*_n + c]);
+            position(new_l, new_c, old_face[l*_n + c]);
         }
 }
 
 /*==============================================================
 | function: allSameColor
 ==============================================================*/
-bool Face::allSameColor()
+bool cubing::face::all_same_color()
 {
     char first_color = _squares[0];
     int  size = _n*_n;
@@ -177,16 +177,16 @@ bool Face::allSameColor()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-ostream& operator<<(ostream& os, const Face& face)
+std::ostream& cubing::operator<<(std::ostream& os, const face& face)
 {   
-    int n = face.getN();
+    int n = face.N();
     for(int l=0; l<n; l++)
     {
         for(int c=0; c<n; c++)
         {   
-            os << face.getPosition(l, c) << ' ';
+            os << face.position(l, c) << ' ';
         }
-        os << endl; 
+        os << std::endl; 
     }
     return os;
 }
@@ -194,15 +194,15 @@ ostream& operator<<(ostream& os, const Face& face)
 /*==============================================================
 | function: "comparison"
 ==============================================================*/
-bool operator==(const Face& face_1, const Face& face_2)
+bool cubing::operator==(const face& face_1, const face& face_2)
 {
-    if(face_1.getN() != face_2.getN())
+    if(face_1.N() != face_2.N())
         return false;
 
-    int n = face_1.getN();
+    int n = face_1.N();
 
     for(int i=0; i<n; i++)
-        if(face_1.getPositionByIndex(i) != face_2.getPositionByIndex(i))
+        if(face_1.position_by_index(i) != face_2.position_by_index(i))
             return false;
 
     return true;
@@ -211,7 +211,7 @@ bool operator==(const Face& face_1, const Face& face_2)
 /*==============================================================
 | function: "comparison"
 ==============================================================*/
-bool operator!=(const Face& face_1, const Face& face_2)
+bool cubing::operator!=(const face& face_1, const face& face_2)
 {
     return !(face_1 == face_2);
 }
