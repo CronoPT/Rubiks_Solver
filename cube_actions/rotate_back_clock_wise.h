@@ -55,6 +55,6 @@ class rotate_back_clock_wise: public action<rubiks_cube>
         }
 };
 
-} // cubing
+} //cubing
 
 #endif
