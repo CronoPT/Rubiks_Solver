@@ -10,13 +10,14 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __ROTATERIGHTCOUNTERCLOCKWISE_H__
-#define __ROTATERIGHTCOUNTERCLOCKWISE_H__
+#ifndef __ROTATE_RIGHT_COUNTER_CLOCK_WISE_H__
+#define __ROTATE_RIGHT_COUNTER_CLOCK_WISE_H__
 
-#include "../Search/Action.h"
-#include "../RubiksCube.h"
+#include "../search/action.h"
+#include "../rubiks_cube.h"
 
-using namespace std;
+namespace cubing
+{
 
 /*==============================================================
 | class: rotateRightCounterClockWise - squares is the number of 
@@ -25,33 +26,35 @@ using namespace std;
 | diferent from 1, since it does not make sense to rotate
 | beyond the middle
 ==============================================================*/
-class RotateRightCounterClockWise: public Action<RubiksCube>
+class rotate_right_counter_clock_wise: public action<rubiks_cube>
 {
     private:
         int _squares;
 
     public:
-        RotateRightCounterClockWise(int squares): Action<RubiksCube>()
+        rotate_right_counter_clock_wise(int squares): action<rubiks_cube>()
         {   
             _squares = squares;
         }
 
-        RubiksCube execute(RubiksCube cube) override
+        rubiks_cube execute(rubiks_cube cube) override
         {
-            cube.rotateFaceCounterClockWise(RIGHT, _squares);
+            cube.rotate_face_counter_clock_wise(RIGHT, _squares);
             return cube;
         }
 
-        void dumpTo(ostream& os) const override
+        void dump_to(ostream& os) const override
         {
             os << "Right Counter " << _squares;
         }
 
-        friend ostream& operator<<(ostream& os, const RotateRightCounterClockWise& r)
+        friend ostream& operator<<(ostream& os, const rotate_right_counter_clock_wise& r)
         {
-            r.dumpTo(os);
+            r.dump_to(os);
             return os;
         }
 };
+
+} //cubing
 
 #endif
