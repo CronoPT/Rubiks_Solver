@@ -13,41 +13,42 @@
 #ifndef __PROBLEM_H__
 #define __PROBLEM_H__ 
 
-#include "Action.h"
-#include "Node.h"
+#include "action.h"
+#include "node.h"
 #include <vector>
 
-using namespace std;
+namespace search
+{ 
 
-template<typename C> class SearchingAlgorithm;
+template<typename C> class searching_algorithm;
 
 /*==============================================================
 | class: Problem - a template of things to implement for a
 | given type of search problem, e.g a Rubik's Cube
 ==============================================================*/
 template<typename C>
-class Problem
+class problem
 {
     private:
         C _initial;
 
     protected:
-        Problem(C initial):
+        problem(C initial):
           _initial(initial){}
 
     public:
-        C getInitialState() const { return _initial; }
+        C initial_state() const { return _initial; }
 
-        virtual vector<shared_ptr<Action<C>>> actions(C state) = 0; //virtual function
+        virtual vector<shared_ptr<action<C>>> actions(C state) = 0; //virtual function
 
-        virtual C result(C state, shared_ptr<Action<C>> action)
+        virtual C result(C state, shared_ptr<action<C>> action)
         {
             return action->execute(state);
         }
 
-        virtual bool goalTest(C state) = 0; //virtual function
+        virtual bool goal_test(C state) = 0; //virtual function
 
-        virtual double pathCost(double cost, C state_1, shared_ptr<Action<C>> action, C state_2)
+        virtual double path_cost(double cost, C state_1, shared_ptr<action<C>> action, C state_2)
         {   
             //default: one more step
             return cost+1;
@@ -55,10 +56,12 @@ class Problem
 
         virtual double heuristic(C state) const { return 0; }
 
-        vector<shared_ptr<Action<C>>> solve(SearchingAlgorithm<C>* algorithm) const
+        vector<shared_ptr<action<C>>> solve(searching_algorithm<C>* algorithm) const
         {
             return algorithm->execute(this);
         }
 };
+
+} //search
 
 #endif
