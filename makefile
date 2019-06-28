@@ -1,20 +1,20 @@
 CFLAGS = -O -g
 CC = g++
 
-rubiksSolver: main.o Face.o RubiksCube.o AStarSearch.o
-	$(CC) $(CFLAGS) -o rubiksSolver main.o Face.o RubiksCube.o AStarSearch.o
+rubiksSolver: main.o face.o rubiks_cube.o a_star_search.o
+	$(CC) $(CFLAGS) -o rubiksSolver main.o face.o rubiks_cube.o a_star_search.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) -c main.cpp
 
-Face.o: Face.h Face.cpp
-	$(CC) $(CFLAGS) -c Face.cpp
+face.o: face.h face.cpp
+	$(CC) $(CFLAGS) -c face.cpp
 
-RubiksCube.o: RubiksCube.h RubiksCube.cpp
-	$(CC) $(CFLAGS) -c RubiksCube.cpp
+rubiks_cube.o: rubiks_cube.h rubiks_cube.cpp
+	$(CC) $(CFLAGS) -c rubiks_cube.cpp
 
-AStarSearch.o: Search/AStarSearch.h Search/AStarSearch.cpp Search/Node.h Search/Action.h Search/Problem.h
-	$(CC) $(CFLAGS) -c Search/AStarSearch.cpp
+a_star_search.o: search/a_star_search.h search/a_star_search.cpp search/node.h search/action.h search/problem.h
+	$(CC) $(CFLAGS) -c search/a_star_search.cpp
 
 clean:
 	rm *.o
