@@ -13,23 +13,26 @@
 #ifndef __NODE_H__
 #define __NODE_H__ 
 
-#include "Action.h"
+#include "action.h"
 
 #include <memory>
 #include <iostream>
 
+namespace search
+{
+
 template <typename C>
-class Node
+class node
 {
     private:
-        C          _state;
-        shared_ptr<Node<C>>   _parent;
-        shared_ptr<Action<C>> _action;
-        double     _path_cost;
-        double     _heuristic;
+        C      _state;
+        shared_ptr<node<C>>   _parent;
+        shared_ptr<action<C>> _action;
+        double _path_cost;
+        double _heuristic;
 
     public:
-        Node(C state, shared_ptr<Node<C>> parent, 
+        node(C state, shared_ptr<Node<C>> parent, 
           shared_ptr<Action<C>> action, double path_cost,
           double heuristic):
           _state(state),
@@ -38,7 +41,7 @@ class Node
           _path_cost(path_cost), 
           _heuristic(heuristic){}
 
-        Node(C state, shared_ptr<Node<C>> parent, 
+        node(C state, shared_ptr<Node<C>> parent, 
           shared_ptr<Action<C>> action, double path_cost):
           _state(state),
           _parent(parent),
@@ -46,37 +49,39 @@ class Node
           _path_cost(path_cost), 
           _heuristic(0) {}
 
-        C getState() const { return _state; }
+        C state() const { return _state; }
 
-        shared_ptr<Node<C>> getParent() const  { return _parent; }
+        shared_ptr<Node<C>> parent() const  { return _parent; }
 
-        shared_ptr<Action<C>> getAction() const { return _action; }
+        shared_ptr<Action<C>> action() const { return _action; }
 
-        double getPathCost() const  { return _path_cost; }
+        double path_cost() const  { return _path_cost; }
 
-        double getHeuristic() const { return _heuristic; }
+        double heuristic() const { return _heuristic; }
 
         bool operator<(const Node<C>& other)
         {
-            return getPathCost() + getHeuristic() < 
-                   other.getPathCost() + other.getHeuristic();
+            return path_cost() + heuristic() < 
+                   other.path_cost() + other.heuristic();
         }
 
         bool operator>(const Node<C>& other)
         {
-            return getPathCost() + getHeuristic() > 
-                   other.getPathCost() + other.getHeuristic();
+            return path_cost() + heuristic() > 
+                   other.path_cost() + other.heuristic();
         }
 
-        friend bool operator<(const shared_ptr<Node<C>>& node_1, const shared_ptr<Node<C>>& node_2)
+        friend bool operator<(const shared_ptr<node<C>>& node_1, const shared_ptr<node<C>>& node_2)
         {
             return *node_1 < *node_2;
         }
 
-        friend bool operator>(const shared_ptr<Node<C>>& node_1, const shared_ptr<Node<C>>& node_2)
+        friend bool operator>(const shared_ptr<node<C>>& node_1, const shared_ptr<node<C>>& node_2)
         {
             return *node_1 > *node_2;
         }
 };
+
+} //search
 
 #endif

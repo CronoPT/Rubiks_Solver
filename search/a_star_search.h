@@ -36,6 +36,6 @@ class a_star_search: public searching_algorithm<C>
         vector<shared_ptr<action<C>>> solution(shared_ptr<Node<C>> node);
 };
 
-} //cubing
+} //search
 
 #endif
