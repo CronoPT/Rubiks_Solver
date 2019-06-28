@@ -16,9 +16,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Face.h"
-
-using namespace std;
+#include "face.h"
 
 /*==============================================================
 | Just following the layout of a regular d6 die. Every oposing
@@ -30,6 +28,9 @@ using namespace std;
 #define BOTTOM 1 
 #define RIGHT  2
 #define LEFT   3
+
+namespace cubing
+{
 
 /*==============================================================
 | class: Rubik's Cube
@@ -46,46 +47,48 @@ using namespace std;
 |     * bottom: as if you turned the bottom face to you, leaving 
 |     the front face faced up
 ==============================================================*/
-class RubiksCube
+class rubiks_cube
 {
     private:
-        vector<Face> _faces;
+        std::vector<face> _faces;
         int _n;
 
-        void rotateFrontClockWise(int squares);
-        void rotateBackClockWise(int squares);
-        void rotateTopClockWise(int squares);
-        void rotateBottomClockWise(int squares);
-        void rotateRightClockWise(int squares);
-        void rotateLeftClockWise(int squares);
+        void rotate_front_clock_wise(int squares);
+        void rotate_back_clock_wise(int squares);
+        void rotate_top_clock_wise(int squares);
+        void rotate_bottom_clock_wise(int squares);
+        void rotate_right_clock_wise(int squares);
+        void rotate_left_clock_wise(int squares);
 
-        void rotateFrontCounterClockWise(int squares);
-        void rotateBackCounterClockWise(int squares);
-        void rotateTopCounterClockWise(int squares);
-        void rotateBottomCounterClockWise(int squares);
-        void rotateRightCounterClockWise(int squares);
-        void rotateLeftCounterClockWise(int squares);
+        void rotate_front_counter_clock_wise(int squares);
+        void rotate_back_counter_clock_wise(int squares);
+        void rotate_top_counter_clock_wise(int squares);
+        void rotate_bottom_counter_clock_wise(int squares);
+        void rotate_right_counter_clock_wise(int squares);
+        void rotate_left_counter_clock_wise(int squares);
 
-        int getFaceToTop(int face)    const;
-        int getFaceToBottom(int face) const;
-        int getFaceToRight(int face)  const;
-        int getFaceToLeft(int faces)  const;
+        int face_to_top(int face)    const;
+        int face_to_bottom(int face) const;
+        int face_to_right(int face)  const;
+        int face_to_left(int faces)  const;
 
     public:
-        RubiksCube(int n, vector<Face> faces);
-        RubiksCube(int n, Face front, Face bottom, Face right, \
-          Face left, Face top, Face back);
-        void   rotateFaceClockWise(int face, int squares);
-        void   rotateFaceCounterClockWise(int face, int squares);
-        int    getN() const;
-        vector<Face> getFaces() const;
-        Face   getFace(int face) const;
-        string getFaceDescription(int face) const;
-        bool   solved();
-        friend ostream& operator<<(ostream& os, const RubiksCube& cube);
-        friend bool     operator==(const RubiksCube& cube_1, const RubiksCube& cube_2);
-        friend bool     operator!=(const RubiksCube& cube_1, const RubiksCube& cube_2);
-        friend bool     operator<(const RubiksCube& cube_1, const RubiksCube& cube_2);
+        rubiks_cube(int n, std::vector<face> faces);
+        rubiks_cube(int n, face front, face bottom, face right, \
+          face left, face top, face back);
+        void rotate_face_clock_wise(int face, int squares);
+        void rotate_face_counter_clock_wise(int face, int squares);
+        int  N() const;
+        std::vector<face> faces() const;
+        face face(int face) const;
+        std::string face_description(int face) const;
+        bool solved();
+        friend std::ostream& operator<<(std::ostream& os, const rubiks_cube& cube);
+        friend bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+        friend bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+        friend bool operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
 };
+
+} //cubing
 
 #endif

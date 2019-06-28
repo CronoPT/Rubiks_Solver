@@ -10,11 +10,11 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __SEARCHINGALGORITHM_H__
-#define __SEARCHINGALGORITHM_H__ 
+#ifndef __SEARCHING_ALGORITHM_H__
+#define __SEARCHING_ALGORITHM_H__ 
 
-#include "Action.h"
-#include "Problem.h"
+#include "action.h"
+#include "problem.h"
 #include <vector>
 
 namespace search
