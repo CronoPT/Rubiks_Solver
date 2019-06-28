@@ -15,25 +15,28 @@
 
 #include<iostream>
 
-using namespace std;
+namespace search
+{
 
 /*==============================================================
 | class: Problem - a template of things to implement for a
 | given type of search problem, e.g a Rubik's Cube
 ==============================================================*/
 template<typename C>
-class Action
+class action
 {
     public:
         virtual C execute(C state) = 0; //virtual function
 
-        virtual void dumpTo(ostream& os) const = 0;
+        virtual void dump_to(ostream& os) const = 0;
 
-        friend ostream& operator<<(ostream& os, const Action<C>& a) 
+        friend ostream& operator<<(ostream& os, const action<C>& a) 
         {
-            a.dumpTo(os);
+            a.dump_to(os);
             return os;
         }
 };
+
+} //search
 
 #endif
