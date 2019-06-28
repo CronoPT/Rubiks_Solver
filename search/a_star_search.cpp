@@ -10,43 +10,43 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#include "AStarSearch.h"
+#include "a_star_search.h"
 
 /*==============================================================
 | function: execute
 ==============================================================*/
 template<typename C>
-vector<shared_ptr<Action<C>>> AStarSearch<C>::execute(Problem<C>* problem)
+vector<shared_ptr<Action<C>>> search::a_star_search<C>::execute(Problem<C>* problem)
 {
-    shared_ptr<Node<C>> node = make_shared<Node<C>>(problem->getInitialState(), 
+    shared_ptr<Node<C>> node = make_shared<Node<C>>(problem->initial_state(), 
                                                     nullptr, nullptr, 0,
                                                     problem->heuristic(
-                                                    problem->getInitialState()));
-    priority_queue<shared_ptr<Node<C>>, 
-                   vector<shared_ptr<Node<C>>>, 
-                   std::greater<shared_ptr<Node<C>>>> frontier;
+                                                    problem->initial_state()));
+    priority_queue<shared_ptr<node<C>>, 
+                   vector<shared_ptr<node<C>>>, 
+                   std::greater<shared_ptr<node<C>>>> frontier;
     set<C> explored;
-    vector<shared_ptr<Action<C>>> actions;
+    vector<shared_ptr<action<C>>> actions;
 
     frontier.push(node);
-    explored.insert(node->getState());
+    explored.insert(node->state());
     int depth = 0;
     while(!frontier.empty())
     {
         node = frontier.top(); /*chooses the lowest-cost node in frontier*/
         frontier.pop();
 
-        if( problem->goalTest(node->getState()) )  
+        if( problem->goal_test(node->state()) )  
             return solution(node); /*builds a vector with the actions*/
         
-        explored.insert(node->getState());
+        explored.insert(node->state());
 
         /*expansion*/
-        for(shared_ptr<Action<C>> action : problem->actions(node->getState()))
+        for(shared_ptr<action<C>> action : problem->actions(node->state()))
         {
-            shared_ptr<Node<C>> child = childNode(problem, action, node);
+            shared_ptr<node<C>> child = child_node(problem, action, node);
 
-            if( explored.count(child->getState())==0 )
+            if( explored.count(child->state())==0 )
             {    
                 frontier.push(child);
             }
@@ -59,19 +59,19 @@ vector<shared_ptr<Action<C>>> AStarSearch<C>::execute(Problem<C>* problem)
 | function: childNode
 ==============================================================*/
 template<typename C>
-shared_ptr<Node<C>> AStarSearch<C>::childNode(Problem<C>* problem, 
-                                              shared_ptr<Action<C>> action, 
-                                              shared_ptr<Node<C>> parent)
+shared_ptr<Node<C>> search::a_star_search<C>::child_node(problem<C>* problem, 
+                                                         shared_ptr<action<C>> action, 
+                                                         shared_ptr<node<C>> parent)
 {
-    C state = problem->result(parent->getState(), action);
+    C state = problem->result(parent->state(), action);
 
-    double path_cost = problem->pathCost(parent->getPathCost(),
-                                         parent->getState(), 
-                                         action, state);
+    double path_cost = problem->path_cost(parent->path_xost(),
+                                          parent->state(), 
+                                          action, state);
 
     double heuristic = problem->heuristic(state);
 
-    return make_shared<Node<C>>(state, parent, action, path_cost, heuristic);
+    return make_shared<node<C>>(state, parent, action, path_cost, heuristic);
 
 }
 
@@ -79,17 +79,17 @@ shared_ptr<Node<C>> AStarSearch<C>::childNode(Problem<C>* problem,
 | function: solution
 ==============================================================*/
 template<typename C>
-vector<shared_ptr<Action<C>>> AStarSearch<C>::solution(shared_ptr<Node<C>> node)
+vector<shared_ptr<Action<C>>> search::a_star_search<C>::solution(shared_ptr<Node<C>> node)
 {
-    stack<shared_ptr<Action<C>>>  sol_stack;
-    vector<shared_ptr<Action<C>>> solution;
-    shared_ptr<Node<C>> curr_node = node;
+    stack<shared_ptr<action<C>>>  sol_stack;
+    vector<shared_ptr<action<C>>> solution;
+    shared_ptr<node<C>> curr_node = node;
 
     /*the initial state node has a Null action*/
-    while( curr_node->getAction() )
+    while( curr_node->action() )
     {   
-        sol_stack.push(curr_node->getAction());
-        curr_node = curr_node->getParent();
+        sol_stack.push(curr_node->action());
+        curr_node = curr_node->parent();
     }
 
     while( !sol_stack.empty() )

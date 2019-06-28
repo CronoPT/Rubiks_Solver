@@ -10,29 +10,32 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __ASTARSEARCH_H__
-#define __ASTARSEARCH_H__ 
+#ifndef __A_STAR_SEARCH_H__
+#define __A_STAR_SEARCH_H__ 
 
-#include "SearchingAlgorithm.h"
-#include "Node.h"
+#include "searching_algorithm.h"
+#include "node.h"
 #include <vector>
 #include <queue>
 #include <stack>
 #include <set>
 
-using namespace std;
+namespace search
+{
 
 template <typename C>
-class AStarSearch: public SearchingAlgorithm<C>
+class a_star_search: public searching_algorithm<C>
 {
     public:
-        vector<shared_ptr<Action<C>>> execute(Problem<C>* problem) override;
+        vector<shared_ptr<action<C>>> execute(problem<C>* problem) override;
 
-        shared_ptr<Node<C>> childNode(Problem<C>* problem,
-                                      shared_ptr<Action<C>> action, 
-                                      shared_ptr<Node<C>> parent);
+        shared_ptr<node<C>> child_node(problem<C>* problem,
+                                      shared_ptr<action<C>> action, 
+                                      shared_ptr<node<C>> parent);
 
-        vector<shared_ptr<Action<C>>> solution(shared_ptr<Node<C>> node);
+        vector<shared_ptr<action<C>>> solution(shared_ptr<Node<C>> node);
 };
+
+} //cubing
 
 #endif
