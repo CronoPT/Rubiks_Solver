@@ -17,10 +17,10 @@
 #include "node.h"
 #include <vector>
 
+template<typename C> class searching_algorithm;
+
 namespace search
 { 
-
-template<typename C> class searching_algorithm;
 
 /*==============================================================
 | class: Problem - a template of things to implement for a
@@ -39,16 +39,16 @@ class problem
     public:
         C initial_state() const { return _initial; }
 
-        virtual vector<shared_ptr<action<C>>> actions(C state) = 0; //virtual function
+        virtual std::vector<std::shared_ptr<action<C>>> actions(C state) = 0; //virtual function
 
-        virtual C result(C state, shared_ptr<action<C>> action)
+        virtual C result(C state, std::shared_ptr<action<C>> action)
         {
             return action->execute(state);
         }
 
         virtual bool goal_test(C state) = 0; //virtual function
 
-        virtual double path_cost(double cost, C state_1, shared_ptr<action<C>> action, C state_2)
+        virtual double path_cost(double cost, C state_1, std::shared_ptr<action<C>> action, C state_2)
         {   
             //default: one more step
             return cost+1;
@@ -56,7 +56,7 @@ class problem
 
         virtual double heuristic(C state) const { return 0; }
 
-        vector<shared_ptr<action<C>>> solve(searching_algorithm<C>* algorithm) const
+        std::vector<std::shared_ptr<action<C>>> solve(searching_algorithm<C>* algorithm) const
         {
             return algorithm->execute(this);
         }

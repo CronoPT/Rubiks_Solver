@@ -32,6 +32,13 @@
 namespace cubing
 {
 
+/*so that the compiler does not complain*/
+class rubiks_cube;
+std::ostream& operator<<(std::ostream& os, const rubiks_cube& cube);
+bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+bool operator< (const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+
 /*==============================================================
 | class: Rubik's Cube
 | 
@@ -50,7 +57,7 @@ namespace cubing
 class rubiks_cube
 {
     private:
-        std::vector<face> _faces;
+        std::vector<cube_face> _faces;
         int _n;
 
         void rotate_front_clock_wise(int squares);
@@ -73,20 +80,20 @@ class rubiks_cube
         int face_to_left(int faces)  const;
 
     public:
-        rubiks_cube(int n, std::vector<face> faces);
-        rubiks_cube(int n, face front, face bottom, face right, \
-          face left, face top, face back);
+        rubiks_cube(int n, std::vector<cube_face> faces);
+        rubiks_cube(int n, cube_face front, cube_face bottom, cube_face right, \
+                    cube_face left, cube_face top, cube_face back);
         void rotate_face_clock_wise(int face, int squares);
         void rotate_face_counter_clock_wise(int face, int squares);
         int  N() const;
-        std::vector<face> faces() const;
-        face face(int face) const;
+        std::vector<cube_face> faces() const;
+        cube_face face(int face) const;
         std::string face_description(int face) const;
         bool solved();
-        friend std::ostream& operator<<(std::ostream& os, const rubiks_cube& cube);
-        friend bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
-        friend bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
-        friend bool operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+		friend std::ostream& operator<<(std::ostream& os, const rubiks_cube& cube);
+		friend bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+		friend bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+		friend bool operator< (const rubiks_cube& cube_1, const rubiks_cube& cube_2);
 };
 
 } //cubing

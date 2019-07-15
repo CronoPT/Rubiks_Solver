@@ -16,15 +16,15 @@
 | function: RubiksCube Constructor - faces indexing must
 | agree with the defines in the .h file
 ==============================================================*/
-cubing::rubiks_cube::rubiks_cube(int n, std::vector<face> faces):
+cubing::rubiks_cube::rubiks_cube(int n, std::vector<cubing::cube_face> faces):
   _faces(faces),
   _n(n)
 {
 
 }
 
-cubing::rubiks_cube::rubiks_cube(int n, face front, face bottom, \
-  face right, face left, face top, face back):
+cubing::rubiks_cube::rubiks_cube(int n, cubing::cube_face front, cubing::cube_face bottom, \
+  cubing::cube_face right, cubing::cube_face left, cubing::cube_face top, cubing::cube_face back):
   _faces({front, bottom, right, left, top, back}),
   _n(n)
 {
@@ -98,7 +98,7 @@ int cubing::rubiks_cube::N() const
 /*==============================================================
 | function: getFaces
 ==============================================================*/
-std::vector<cubing::face> cubing::rubiks_cube::faces() const
+std::vector<cubing::cube_face> cubing::rubiks_cube::faces() const
 {
     return _faces;
 }
@@ -106,7 +106,7 @@ std::vector<cubing::face> cubing::rubiks_cube::faces() const
 /*==============================================================
 | function: getFace - returns the face indexed by "face"
 ==============================================================*/
-cubing::face cubing::rubiks_cube::face(int face) const
+cubing::cube_face cubing::rubiks_cube::face(int face) const
 {
     return _faces[face];
 }
@@ -139,8 +139,8 @@ std::string cubing::rubiks_cube::face_description(int face) const
 ==============================================================*/
 bool cubing::rubiks_cube::solved()
 {
-    for(face face : _faces)
-        if(!face.allSameColor())
+    for(cubing::cube_face face : _faces)
+        if(!face.all_same_color())
             return false;
 
     return true;
@@ -188,7 +188,7 @@ bool cubing::operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
 bool cubing::operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
 {
     return !(cube_1 == cube_2);
-}
+}   
 
 /*==============================================================
 | function: rotateFrontClockWise

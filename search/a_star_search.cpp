@@ -16,17 +16,17 @@
 | function: execute
 ==============================================================*/
 template<typename C>
-vector<shared_ptr<Action<C>>> search::a_star_search<C>::execute(Problem<C>* problem)
+std::vector<std::shared_ptr<search::action<C>>> search::a_star_search<C>::execute(problem<C>* problem)
 {
-    shared_ptr<Node<C>> node = make_shared<Node<C>>(problem->initial_state(), 
-                                                    nullptr, nullptr, 0,
-                                                    problem->heuristic(
-                                                    problem->initial_state()));
-    priority_queue<shared_ptr<node<C>>, 
-                   vector<shared_ptr<node<C>>>, 
-                   std::greater<shared_ptr<node<C>>>> frontier;
-    set<C> explored;
-    vector<shared_ptr<action<C>>> actions;
+    std::shared_ptr<search::node<C>> node = std::make_shared<search::node<C>>(problem->initial_state(), 
+                                                              nullptr, nullptr, 0,
+                                                              problem->heuristic(
+                                                              problem->initial_state()));
+    std::priority_queue<std::shared_ptr<search::node<C>>, 
+                        std::vector<std::shared_ptr<search::node<C>>>, 
+                        std::greater<std::shared_ptr<search::node<C>>>> frontier;
+    std::set<C> explored;
+    std::vector<std::shared_ptr<action<C>>> actions;
 
     frontier.push(node);
     explored.insert(node->state());
@@ -42,9 +42,9 @@ vector<shared_ptr<Action<C>>> search::a_star_search<C>::execute(Problem<C>* prob
         explored.insert(node->state());
 
         /*expansion*/
-        for(shared_ptr<action<C>> action : problem->actions(node->state()))
+        for(std::shared_ptr<action<C>> action : problem->actions(node->state()))
         {
-            shared_ptr<node<C>> child = child_node(problem, action, node);
+            std::shared_ptr<search::node<C>> child = child_node(problem, action, node);
 
             if( explored.count(child->state())==0 )
             {    
@@ -59,19 +59,19 @@ vector<shared_ptr<Action<C>>> search::a_star_search<C>::execute(Problem<C>* prob
 | function: childNode
 ==============================================================*/
 template<typename C>
-shared_ptr<Node<C>> search::a_star_search<C>::child_node(problem<C>* problem, 
-                                                         shared_ptr<action<C>> action, 
-                                                         shared_ptr<node<C>> parent)
+std::shared_ptr<search::node<C>> search::a_star_search<C>::child_node(problem<C>* problem, 
+                                                                      std::shared_ptr<action<C>> action, 
+                                                                      std::shared_ptr<node<C>> parent)
 {
     C state = problem->result(parent->state(), action);
 
-    double path_cost = problem->path_cost(parent->path_xost(),
+    double path_cost = problem->path_cost(parent->path_cost(),
                                           parent->state(), 
                                           action, state);
 
     double heuristic = problem->heuristic(state);
 
-    return make_shared<node<C>>(state, parent, action, path_cost, heuristic);
+    return std::make_shared<node<C>>(state, parent, action, path_cost, heuristic);
 
 }
 
@@ -79,16 +79,16 @@ shared_ptr<Node<C>> search::a_star_search<C>::child_node(problem<C>* problem,
 | function: solution
 ==============================================================*/
 template<typename C>
-vector<shared_ptr<Action<C>>> search::a_star_search<C>::solution(shared_ptr<Node<C>> node)
+std::vector<std::shared_ptr<search::action<C>>> search::a_star_search<C>::solution(std::shared_ptr<node<C>> node)
 {
-    stack<shared_ptr<action<C>>>  sol_stack;
-    vector<shared_ptr<action<C>>> solution;
-    shared_ptr<node<C>> curr_node = node;
+    std::stack<std::shared_ptr<action<C>>>  sol_stack;
+    std::vector<std::shared_ptr<action<C>>> solution;
+    std::shared_ptr<search::node<C>> curr_node = node;
 
     /*the initial state node has a Null action*/
-    while( curr_node->action() )
+    while( curr_node->action_exec() )
     {   
-        sol_stack.push(curr_node->action());
+        sol_stack.push(curr_node->action_exec());   
         curr_node = curr_node->parent();
     }
 

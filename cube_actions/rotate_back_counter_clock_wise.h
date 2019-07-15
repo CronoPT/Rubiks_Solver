@@ -13,6 +13,7 @@
 #ifndef __ROTATE_BACK_COUNTER_CLOCK_WISE_H__
 #define __ROTATE_BACK_COUNTER_CLOCK_WISE_H__
 
+#include <iostream>
 #include "../search/action.h"
 #include "../rubiks_cube.h"
 
@@ -26,7 +27,7 @@ namespace cubing
 | diferent from 1, since it does not make sense to rotate
 | beyond the middle
 ==============================================================*/
-class rotate_back_counter_clock_wise: public action<rubiks_cube>
+class rotate_back_counter_clock_wise: public search::action<rubiks_cube>
 {
     private:
         int _squares;
@@ -43,12 +44,12 @@ class rotate_back_counter_clock_wise: public action<rubiks_cube>
             return cube;
         }
 
-        void dump_to(ostream& os) const override
+        void dump_to(std::ostream& os) const override
         {
             os << "Back Counter " << _squares;
         }
 
-        friend ostream& operator<<(ostream& os, const rotate_back_counter_clock_wise& r)
+        friend std::ostream& operator<<(std::ostream& os, const rotate_back_counter_clock_wise& r)
         {
             r.dump_to(os);
             return os;

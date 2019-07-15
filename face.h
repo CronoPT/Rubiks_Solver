@@ -26,19 +26,24 @@
 namespace cubing 
 {
 
+class cube_face;
+std::ostream& operator<<(std::ostream& os, const cube_face& face);
+bool operator==(const cube_face& face_1, const cube_face& face_2);
+bool operator!=(const cube_face& face_1, const cube_face& face_2);  
+
 /*==============================================================
 | class: Face - the representation of a Rubik's cube face of
 | size _n. For example a standart 3x3 Rubik's cube has 6 
 | faces in wich _n = 3.
 ==============================================================*/
-class face
+class cube_face
 {  
     private:
         std::vector<char> _squares;
         int _n;
 
     public:
-        face(int n, std::vector<char> squares);
+        cube_face(int n, std::vector<char> squares);
         int  N() const;
         char position_by_index(int index) const;
         char position(int l, int c) const;
@@ -52,9 +57,9 @@ class face
         void rotate_clock_wise();
         void rotate_counter_clock_wise();
         bool all_same_color();
-        friend std::ostream& operator<<(std::ostream& os, const face& face);
-        friend bool operator==(const face& face_1, const face& face_2);
-        friend bool operator!=(const face& face_1, const face& face_2);   
+        friend std::ostream& operator<<(std::ostream& os, const cube_face& face);
+        friend bool operator==(const cube_face& face_1, const cube_face& face_2);
+        friend bool operator!=(const cube_face& face_1, const cube_face& face_2);   
 };
 
 } //cubing
