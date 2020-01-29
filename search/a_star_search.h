@@ -20,19 +20,22 @@
 #include <stack>
 #include <set>
 
-using namespace std;
+namespace search
+{
 
 template <typename C>
 class a_star_search: public searching_algorithm<C>
 {
     public:
-        vector<shared_ptr<action<C>>> execute(problem<C>* problem) override;
+        std::vector<std::shared_ptr<action<C>>> execute(problem<C>* problem) override;
 
-        shared_ptr<node<C>> child_node(problem<C>* problem,
-                                      shared_ptr<action<C>> action, 
-                                      shared_ptr<node<C>> parent);
+        std::shared_ptr<node<C>> child_node(problem<C>* problem,
+                                            std::shared_ptr<action<C>> action, 
+                                            std::shared_ptr<node<C>> parent);
 
-        vector<shared_ptr<action<C>>> solution(shared_ptr<node<C>> node);
+        std::vector<std::shared_ptr<action<C>>> solution(std::shared_ptr<node<C>> node);
 };
+
+}// namespace search
 
 #endif

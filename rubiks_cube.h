@@ -18,8 +18,6 @@
 #include <iostream>
 #include "face.h"
 
-using namespace std;
-
 /*==============================================================
 | Just following the layout of a regular d6 die. Every oposing
 | face sums 5 (7 in a regular die).
@@ -46,10 +44,13 @@ using namespace std;
 |     * bottom: as if you turned the bottom face to you, leaving 
 |     the front face faced up
 ==============================================================*/
+namespace cube 
+{
+
 class rubiks_cube
 {
     private:
-        vector<face> _faces;
+        std::vector<face> _faces;
         int _n;
 
         void rotate_front_clock_wise(int squares);
@@ -72,20 +73,23 @@ class rubiks_cube
         int get_face_to_left(int faces)  const;
 
     public:
-        rubiks_cube(int n, vector<face> faces);
+        rubiks_cube(int n, std::vector<face> faces);
         rubiks_cube(int n, face front, face bottom, face right, \
           face left, face top, face back);
         void   rotate_face_clock_wise(int face, int squares);
         void   rotate_face_counter_clock_wise(int face, int squares);
         int    get_n() const;
-        vector<face> get_faces() const;
+        std::vector<face> get_faces() const;
         face   get_face(int face) const;
-        string get_face_description(int face) const;
+        std::string get_face_description(int face) const;
         bool   solved();
-        friend ostream& operator<<(ostream& os, const rubiks_cube& cube);
-        friend bool     operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
-        friend bool     operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
-        friend bool     operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
 };
+
+std::ostream& operator<<(std::ostream& os, const rubiks_cube& cube);
+bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+bool operator<(const  rubiks_cube& cube_1, const rubiks_cube& cube_2);
+
+}// namespace cube
 
 #endif

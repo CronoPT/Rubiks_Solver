@@ -22,6 +22,8 @@ to a template class
 #include "search/a_star_search.cpp"
 
 using namespace std;
+using namespace search;
+using namespace cube;
 
 rubiks_cube foo();
 rubiks_cube doneCube();

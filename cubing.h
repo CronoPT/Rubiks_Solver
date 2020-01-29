@@ -32,13 +32,18 @@
 
 #include <memory>
 
-class cubing: public problem<rubiks_cube>
+namespace cube 
+{
+
+class cubing: public search::problem<rubiks_cube>
 {
     public:
         cubing(rubiks_cube cube): problem<rubiks_cube>(cube) {}
-        vector<shared_ptr<action<rubiks_cube>>> actions(rubiks_cube cube) override;
+        std::vector<std::shared_ptr<search::action<rubiks_cube>>> actions(rubiks_cube cube) override;
         bool   goal_test(rubiks_cube cube) override;
         double heuristic(rubiks_cube cube) const override;
 };
+
+}// namespace cube
 
 #endif

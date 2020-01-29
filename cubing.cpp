@@ -12,34 +12,34 @@
 
 #include "cubing.h"
 
-vector<shared_ptr<action<rubiks_cube>>> cubing::actions(rubiks_cube cube)
+std::vector<std::shared_ptr<search::action<cube::rubiks_cube>>> cube::cubing::actions(cube::rubiks_cube cube)
 {
-    vector<shared_ptr<action<rubiks_cube>>> res;
+    std::vector<std::shared_ptr<search::action<rubiks_cube>>> res;
     for(int i=1; i<=(int)cube.get_n()/2; i++)
     {
-        res.push_back(make_shared<rotate_back_clock_wise>(rotate_back_clock_wise(i)));
-        res.push_back(make_shared<rotate_back_counter_clock_wise>(rotate_back_counter_clock_wise(i)));
-        res.push_back(make_shared<rotate_front_clock_wise>(rotate_front_clock_wise(i)));
-        res.push_back(make_shared<rotate_front_counter_clock_wise>(rotate_front_counter_clock_wise(i)));
-        res.push_back(make_shared<rotate_top_clock_wise>(rotate_top_clock_wise(i)));
-        res.push_back(make_shared<rotate_top_counter_clock_wise>(rotate_top_counter_clock_wise(i)));
-        res.push_back(make_shared<rotate_bottom_clock_wise>(rotate_bottom_clock_wise(i)));
-        res.push_back(make_shared<rotate_bottom_counter_clock_wise>(rotate_bottom_counter_clock_wise(i)));
-        res.push_back(make_shared<rotate_right_clock_wise>(rotate_right_clock_wise(i)));
-        res.push_back(make_shared<rotate_right_counter_clock_wise>(rotate_right_counter_clock_wise(i)));
-        res.push_back(make_shared<rotate_left_clock_wise>(rotate_left_clock_wise(i)));
-        res.push_back(make_shared<rotate_left_counter_clock_wise>(rotate_left_counter_clock_wise(i))); 
+        res.push_back(std::make_shared<rotate_back_clock_wise>(rotate_back_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_back_counter_clock_wise>(rotate_back_counter_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_front_clock_wise>(rotate_front_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_front_counter_clock_wise>(rotate_front_counter_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_top_clock_wise>(rotate_top_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_top_counter_clock_wise>(rotate_top_counter_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_bottom_clock_wise>(rotate_bottom_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_bottom_counter_clock_wise>(rotate_bottom_counter_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_right_clock_wise>(rotate_right_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_right_counter_clock_wise>(rotate_right_counter_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_left_clock_wise>(rotate_left_clock_wise(i)));
+        res.push_back(std::make_shared<rotate_left_counter_clock_wise>(rotate_left_counter_clock_wise(i))); 
     }
 
     return res;
 }
 
-bool cubing::goal_test(rubiks_cube cube)
+bool cube::cubing::goal_test(cube::rubiks_cube cube)
 {
     return cube.solved();
 }
 
-double cubing::heuristic(rubiks_cube cube) const
+double cube::cubing::heuristic(cube::rubiks_cube cube) const
 {
     return 0;
     if(cube.solved())

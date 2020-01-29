@@ -18,19 +18,22 @@
 #include <memory>
 #include <iostream>
 
+namespace search
+{
+
 template <typename C>
 class node
 {
     private:
         C _state;
-        shared_ptr<node<C>>   _parent;
-        shared_ptr<action<C>> _action;
+        std::shared_ptr<node<C>>   _parent;
+        std::shared_ptr<action<C>> _action;
         double _path_cost;
         double _heuristic;
 
     public:
-        node(C state, shared_ptr<node<C>> parent, 
-          shared_ptr<action<C>> action, double path_cost,
+        node(C state, std::shared_ptr<node<C>> parent, 
+          std::shared_ptr<action<C>> action, double path_cost,
           double heuristic):
           _state(state),
           _parent(parent),
@@ -38,8 +41,8 @@ class node
           _path_cost(path_cost), 
           _heuristic(heuristic){}
 
-        node(C state, shared_ptr<node<C>> parent, 
-          shared_ptr<action<C>> action, double path_cost):
+        node(C state, std::shared_ptr<node<C>> parent, 
+          std::shared_ptr<action<C>> action, double path_cost):
           _state(state),
           _parent(parent),
           _action(action),
@@ -48,9 +51,9 @@ class node
 
         C get_state() const { return _state; }
 
-        shared_ptr<node<C>> get_parent() const  { return _parent; }
+        std::shared_ptr<node<C>> get_parent() const  { return _parent; }
 
-        shared_ptr<action<C>> get_action() const { return _action; }
+        std::shared_ptr<action<C>> get_action() const { return _action; }
 
         double get_path_cost() const  { return _path_cost; }
 
@@ -68,15 +71,17 @@ class node
                    other.get_path_cost() + other.get_heuristic();
         }
 
-        friend bool operator<(const shared_ptr<node<C>>& node_1, const shared_ptr<node<C>>& node_2)
+        friend bool operator<(const std::shared_ptr<node<C>>& node_1, const std::shared_ptr<node<C>>& node_2)
         {
             return *node_1 < *node_2;
         }
 
-        friend bool operator>(const shared_ptr<node<C>>& node_1, const shared_ptr<node<C>>& node_2)
+        friend bool operator>(const std::shared_ptr<node<C>>& node_1, const std::shared_ptr<node<C>>& node_2)
         {
             return *node_1 > *node_2;
         }
 };
+
+}// namespace search
 
 #endif

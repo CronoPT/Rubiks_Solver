@@ -16,15 +16,15 @@
 | function: rubiks_cube Constructor - faces indexing must
 | agree with the defines in the .h file
 ==============================================================*/
-rubiks_cube::rubiks_cube(int n, vector<face> faces):
+cube::rubiks_cube::rubiks_cube(int n, std::vector<cube::face> faces):
   _faces(faces),
   _n(n)
 {
 
 }
 
-rubiks_cube::rubiks_cube(int n, face front, face bottom, \
-  face right, face left, face top, face back):
+cube::rubiks_cube::rubiks_cube(int n, cube::face front, cube::face bottom, \
+  cube::face right, cube::face left, cube::face top, cube::face back):
   _faces({front, bottom, right, left, top, back}),
   _n(n)
 {
@@ -34,7 +34,7 @@ rubiks_cube::rubiks_cube(int n, face front, face bottom, \
 /*==============================================================
 | function: rotatefaceClockWise
 ==============================================================*/
-void rubiks_cube::rotate_face_clock_wise(int face, int squares)
+void cube::rubiks_cube::rotate_face_clock_wise(int face, int squares)
 {   
     switch(face)
     {
@@ -62,7 +62,7 @@ void rubiks_cube::rotate_face_clock_wise(int face, int squares)
 /*==============================================================
 | function: rotatefaceCounterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_face_counter_clock_wise(int face, int squares)
+void cube::rubiks_cube::rotate_face_counter_clock_wise(int face, int squares)
 {   
     switch(face)
     {
@@ -90,7 +90,7 @@ void rubiks_cube::rotate_face_counter_clock_wise(int face, int squares)
 /*==============================================================
 | function: getN
 ==============================================================*/
-int rubiks_cube::get_n() const
+int cube::rubiks_cube::get_n() const
 {
     return _n;
 }
@@ -98,7 +98,7 @@ int rubiks_cube::get_n() const
 /*==============================================================
 | function: getfaces
 ==============================================================*/
-vector<face> rubiks_cube::get_faces() const
+std::vector<cube::face> cube::rubiks_cube::get_faces() const
 {
     return _faces;
 }
@@ -106,7 +106,7 @@ vector<face> rubiks_cube::get_faces() const
 /*==============================================================
 | function: getface - returns the face indexed by "face"
 ==============================================================*/
-face rubiks_cube::get_face(int face) const
+cube::face cube::rubiks_cube::get_face(int face) const
 {
     return _faces[face];
 }
@@ -115,7 +115,7 @@ face rubiks_cube::get_face(int face) const
 | function: getfaceDescription - just a written description of 
 | each face
 ==============================================================*/
-string rubiks_cube::get_face_description(int face) const
+std::string cube::rubiks_cube::get_face_description(int face) const
 {   
     switch(face)
     {
@@ -137,9 +137,9 @@ string rubiks_cube::get_face_description(int face) const
 /*==============================================================
 | function: solved - all the faces have a unique color
 ==============================================================*/
-bool rubiks_cube::solved()
+bool cube::rubiks_cube::solved()
 {
-    for(face face : _faces)
+    for(cube::face face : _faces)
         if(!face.all_same_color())
             return false;
 
@@ -149,12 +149,12 @@ bool rubiks_cube::solved()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-ostream& operator<<(ostream& os, const rubiks_cube& cube)
+std::ostream& operator<<(std::ostream& os, const cube::rubiks_cube& cube)
 {
     for(int i=0; i<6; i++)
     {
-        os << cube.get_face_description(i) << endl;
-        os << cube.get_face(i) << endl;
+        os << cube.get_face_description(i) << std::endl;
+        os << cube.get_face(i) << std::endl;
     }
     return os;
 }
@@ -162,7 +162,7 @@ ostream& operator<<(ostream& os, const rubiks_cube& cube)
 /*==============================================================
 | function: "comparison"
 ==============================================================*/
-bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
+bool cube::operator==(const cube::rubiks_cube& cube_1, const cube::rubiks_cube& cube_2)
 {
     if(cube_1.get_n() != cube_2.get_n())
         return false;
@@ -177,7 +177,7 @@ bool operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
 /*==============================================================
 | function: "comparison"
 ==============================================================*/
-bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
+bool cube::operator!=(const cube::rubiks_cube& cube_1, const cube::rubiks_cube& cube_2)
 {
     return !(cube_1 == cube_2);
 }
@@ -185,7 +185,7 @@ bool operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
 /*==============================================================
 | function: "comparison"
 ==============================================================*/
-bool operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
+bool cube::operator<(const cube::rubiks_cube& cube_1, const cube::rubiks_cube& cube_2)
 {
     return !(cube_1 == cube_2);
 }
@@ -193,12 +193,12 @@ bool operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2)
 /*==============================================================
 | function: rotateFrontClockWise
 ==============================================================*/
-void rubiks_cube::rotate_front_clock_wise(int squares)
+void cube::rubiks_cube::rotate_front_clock_wise(int squares)
 {
     _faces[FRONT].rotate_clock_wise();
 
-    vector<char> turning_column;
-    vector<char> turning_line;
+    std::vector<char> turning_column;
+    std::vector<char> turning_line;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {   
@@ -218,12 +218,12 @@ void rubiks_cube::rotate_front_clock_wise(int squares)
 /*==============================================================
 | function: rotateBackClockWise
 ==============================================================*/
-void rubiks_cube::rotate_back_clock_wise(int squares)
+void cube::rubiks_cube::rotate_back_clock_wise(int squares)
 {
     _faces[BACK].rotate_clock_wise();
 
-    vector<char> turning_column;
-    vector<char> turning_line;
+    std::vector<char> turning_column;
+    std::vector<char> turning_line;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -243,12 +243,12 @@ void rubiks_cube::rotate_back_clock_wise(int squares)
 /*==============================================================
 | function: rotateTopClockWise
 ==============================================================*/
-void rubiks_cube::rotate_top_clock_wise(int squares)
+void cube::rubiks_cube::rotate_top_clock_wise(int squares)
 {
     _faces[TOP].rotate_clock_wise();
 
-    vector<char> turning_line_1;
-    vector<char> turning_line_2;
+    std::vector<char> turning_line_1;
+    std::vector<char> turning_line_2;
     for(int i=0; i<squares; i++)
     {
         turning_line_1 = _faces[RIGHT].get_line(i);
@@ -264,12 +264,12 @@ void rubiks_cube::rotate_top_clock_wise(int squares)
 /*==============================================================
 | function: rotateBottomClockWise
 ==============================================================*/
-void rubiks_cube::rotate_bottom_clock_wise(int squares)
+void cube::rubiks_cube::rotate_bottom_clock_wise(int squares)
 {
     _faces[BOTTOM].rotate_clock_wise();
 
-    vector<char> turning_line_1;
-    vector<char> turning_line_2;
+    std::vector<char> turning_line_1;
+    std::vector<char> turning_line_2;
     int end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -288,12 +288,12 @@ void rubiks_cube::rotate_bottom_clock_wise(int squares)
 /*==============================================================
 | function: rotateRightClockWise
 ==============================================================*/
-void rubiks_cube::rotate_right_clock_wise(int squares)
+void cube::rubiks_cube::rotate_right_clock_wise(int squares)
 {
     _faces[RIGHT].rotate_clock_wise();
 
-    vector<char> turning_column_1;
-    vector<char> turning_column_2;
+    std::vector<char> turning_column_1;
+    std::vector<char> turning_column_2;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -313,12 +313,12 @@ void rubiks_cube::rotate_right_clock_wise(int squares)
 /*==============================================================
 | function: rotateLeftClockWise
 ==============================================================*/
-void rubiks_cube::rotate_left_clock_wise(int squares)
+void cube::rubiks_cube::rotate_left_clock_wise(int squares)
 {
     _faces[LEFT].rotate_clock_wise();
 
-    vector<char> turning_column_1;
-    vector<char> turning_column_2;
+    std::vector<char> turning_column_1;
+    std::vector<char> turning_column_2;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -338,12 +338,12 @@ void rubiks_cube::rotate_left_clock_wise(int squares)
 /*==============================================================
 | function: rotateFrontCounterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_front_counter_clock_wise(int squares)
+void cube::rubiks_cube::rotate_front_counter_clock_wise(int squares)
 {
     _faces[FRONT].rotate_counter_clock_wise();
 
-    vector<char> turning_column;
-    vector<char> turning_line;
+    std::vector<char> turning_column;
+    std::vector<char> turning_line;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {   
@@ -363,12 +363,12 @@ void rubiks_cube::rotate_front_counter_clock_wise(int squares)
 /*==============================================================
 | function: rotateBackCounterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_back_counter_clock_wise(int squares)
+void cube::rubiks_cube::rotate_back_counter_clock_wise(int squares)
 {
     _faces[BACK].rotate_counter_clock_wise();
 
-    vector<char> turning_column;
-    vector<char> turning_line;
+    std::vector<char> turning_column;
+    std::vector<char> turning_line;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -388,12 +388,12 @@ void rubiks_cube::rotate_back_counter_clock_wise(int squares)
 /*==============================================================
 | function: rotateTopCOunterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_top_counter_clock_wise(int squares)
+void cube::rubiks_cube::rotate_top_counter_clock_wise(int squares)
 {
     _faces[TOP].rotate_counter_clock_wise();
 
-    vector<char> turning_line_1;
-    vector<char> turning_line_2;
+    std::vector<char> turning_line_1;
+    std::vector<char> turning_line_2;
     for(int i=0; i<squares; i++)
     {
         turning_line_1 = _faces[LEFT].get_line(i);
@@ -409,12 +409,12 @@ void rubiks_cube::rotate_top_counter_clock_wise(int squares)
 /*==============================================================
 | function: rotateBottomCounterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_bottom_counter_clock_wise(int squares)
+void cube::rubiks_cube::rotate_bottom_counter_clock_wise(int squares)
 {
     _faces[BOTTOM].rotate_counter_clock_wise();
 
-    vector<char> turning_line_1;
-    vector<char> turning_line_2;
+    std::vector<char> turning_line_1;
+    std::vector<char> turning_line_2;
     int end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -433,12 +433,12 @@ void rubiks_cube::rotate_bottom_counter_clock_wise(int squares)
 /*==============================================================
 | function: rotateRightCounterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_right_counter_clock_wise(int squares)
+void cube::rubiks_cube::rotate_right_counter_clock_wise(int squares)
 {
     _faces[RIGHT].rotate_counter_clock_wise();
 
-    vector<char> turning_column_1;
-    vector<char> turning_column_2;
+    std::vector<char> turning_column_1;
+    std::vector<char> turning_column_2;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -458,12 +458,12 @@ void rubiks_cube::rotate_right_counter_clock_wise(int squares)
 /*==============================================================
 | function: rotateLeftCounterClockWise
 ==============================================================*/
-void rubiks_cube::rotate_left_counter_clock_wise(int squares)
+void cube::rubiks_cube::rotate_left_counter_clock_wise(int squares)
 {
     _faces[LEFT].rotate_counter_clock_wise();
 
-    vector<char> turning_column_1;
-    vector<char> turning_column_2;
+    std::vector<char> turning_column_1;
+    std::vector<char> turning_column_2;
     int start_limit, end_limit;
     for(int i=0; i<squares; i++)
     {
@@ -484,7 +484,7 @@ void rubiks_cube::rotate_left_counter_clock_wise(int squares)
 | function: getfaceToTop - if you turn the face "face" to you
 | this function returns the face above it (index)
 ==============================================================*/
-int rubiks_cube::get_face_to_top(int face) const
+int cube::rubiks_cube::get_face_to_top(int face) const
 {
     switch(face)
     {
@@ -507,7 +507,7 @@ int rubiks_cube::get_face_to_top(int face) const
 | function: getfaceToBottom - if you turn the face "face" to you
 | this function returns the face bellow it (index)
 ==============================================================*/
-int rubiks_cube::get_face_to_bottom(int face) const
+int cube::rubiks_cube::get_face_to_bottom(int face) const
 {
     switch(face)
     {
@@ -530,7 +530,7 @@ int rubiks_cube::get_face_to_bottom(int face) const
 | function: getfaceToRight - if you turn the face "face" to you
 | this function returns the face to its right (index)
 ==============================================================*/
-int rubiks_cube::get_face_to_right(int face) const
+int cube::rubiks_cube::get_face_to_right(int face) const
 {
     switch(face)
     {
@@ -553,7 +553,7 @@ int rubiks_cube::get_face_to_right(int face) const
 | function: getfaceToLeft - if you turn the face "face" to you
 | this function returns the face to its left (index)
 ==============================================================*/
-int rubiks_cube::get_face_to_left(int face) const
+int cube::rubiks_cube::get_face_to_left(int face) const
 {
     switch(face)
     {

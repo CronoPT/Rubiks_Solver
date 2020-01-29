@@ -17,13 +17,16 @@
 #include "problem.h"
 #include <vector>
 
-using namespace std;
+namespace search
+{
 
 template <typename C>
 class searching_algorithm
 {
     public:
-        virtual vector<shared_ptr<action<C>>> execute(problem<C>* problem) = 0;
+        virtual std::vector<std::shared_ptr<action<C>>> execute(problem<C>* problem) = 0;
 };
+
+}// namespace search
 
 #endif
