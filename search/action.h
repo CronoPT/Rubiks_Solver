@@ -10,54 +10,29 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __PROBLEM_H__
-#define __PROBLEM_H__ 
+#ifndef __ACTION_H__
+#define __ACTION_H__ 
 
-#include "Action.h"
-#include "Node.h"
-#include <vector>
+#include<iostream>
 
 using namespace std;
-
-template<typename C> class SearchingAlgorithm;
 
 /*==============================================================
 | class: Problem - a template of things to implement for a
 | given type of search problem, e.g a Rubik's Cube
 ==============================================================*/
 template<typename C>
-class Problem
+class action
 {
-    private:
-        C _initial;
-
-    protected:
-        Problem(C initial):
-          _initial(initial){}
-
     public:
-        C getInitialState() const { return _initial; }
+        virtual C execute(C state) = 0; //virtual function
 
-        virtual vector<shared_ptr<Action<C>>> actions(C state) = 0; //virtual function
+        virtual void dump_to(ostream& os) const = 0;
 
-        virtual C result(C state, shared_ptr<Action<C>> action)
+        friend ostream& operator<<(ostream& os, const action<C>& a) 
         {
-            return action->execute(state);
-        }
-
-        virtual bool goalTest(C state) = 0; //virtual function
-
-        virtual double pathCost(double cost, C state_1, shared_ptr<Action<C>> action, C state_2)
-        {   
-            //default: one more step
-            return cost+1;
-        }
-
-        virtual double heuristic(C state) const { return 0; }
-
-        vector<shared_ptr<Action<C>>> solve(SearchingAlgorithm<C>* algorithm) const
-        {
-            return algorithm->execute(this);
+            a.dump_to(os);
+            return os;
         }
 };
 

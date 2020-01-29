@@ -10,46 +10,46 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __ROTATEBACKCLOCKWISE_H__
-#define __ROTATEBACKCLOCKWISE_H__
+#ifndef __ROTATE_RIGHT_CLOCK_WISE_H__
+#define __ROTATE_RIGHT_CLOCK_WISE_H__
 
-#include "../Search/Action.h"
-#include "../RubiksCube.h"
+#include "../search/action.h"
+#include "../rubiks_cube.h"
 
 using namespace std;
 
 /*==============================================================
-| class: rotateBackClockWise - squares is the number of squares
+| class: rotateRightClockWise - squares is the number of squares
 | to swap between the faces adjacent to the one you're 
 | rotating, for examples, in the 3x3 cube, squares can't be
-| diferent from 1, since it does nvirtual ot make sense to rotate
+| diferent from 1, since it does not make sense to rotate
 | beyond the middle
 ==============================================================*/
-class RotateBackClockWise: public Action<RubiksCube>
+class rotate_right_clock_wise: public action<rubiks_cube>
 {
     private:
         int _squares;
 
     public:
-        RotateBackClockWise(int squares): Action<RubiksCube>()
+        rotate_right_clock_wise(int squares): action<rubiks_cube>()
         {   
             _squares = squares;
         }
         
-        RubiksCube execute(RubiksCube cube) override
+        rubiks_cube execute(rubiks_cube cube) override
         {
-            cube.rotateFaceClockWise(BACK, _squares);
+            cube.rotate_face_clock_wise(RIGHT, _squares);
             return cube;
         }
 
-        void dumpTo(ostream& os) const override
+        void dump_to(ostream& os) const override
         {
-            os << "Back Clock " << _squares;
+            os << "Right Clock " << _squares;
         }
 
-        friend ostream& operator<<(ostream& os, const RotateBackClockWise& r)
+        friend ostream& operator<<(ostream& os, const rotate_right_clock_wise& r)
         {
-            r.dumpTo(os);
+            r.dump_to(os);
             return os;
         }
 };

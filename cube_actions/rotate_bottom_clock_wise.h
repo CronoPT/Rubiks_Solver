@@ -10,46 +10,46 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __ROTATELEFTCOUNTERCLOCKWISE_H__
-#define __ROTATELEFTCOUNTERCLOCKWISE_H__
+#ifndef __ROTATE_BOTTOM_CLOCK_WISE_H__
+#define __ROTATE_BOTTOM_CLOCK_WISE_H__
 
-#include "../Search/Action.h"
-#include "../RubiksCube.h"
+#include "../search/action.h"
+#include "../rubiks_cube.h"
 
 using namespace std;
 
 /*==============================================================
-| class: rotateLeftCounterClockWise - squares is the number of 
-| squares to swap between the faces adjacent to the one you're 
+| class: rotateBottomClockWise - squares is the number of squares
+| to swap between the faces adjacent to the one you're 
 | rotating, for examples, in the 3x3 cube, squares can't be
 | diferent from 1, since it does not make sense to rotate
 | beyond the middle
 ==============================================================*/
-class RotateLeftCounterClockWise: public Action<RubiksCube>
+class rotate_bottom_clock_wise: public action<rubiks_cube>
 {
     private:
         int _squares;
 
     public:
-        RotateLeftCounterClockWise(int squares): Action<RubiksCube>()
+        rotate_bottom_clock_wise(int squares): action<rubiks_cube>()
         {   
             _squares = squares;
         }
-
-        RubiksCube execute(RubiksCube cube) override
+        
+        rubiks_cube execute(rubiks_cube cube) override
         {
-            cube.rotateFaceCounterClockWise(LEFT, _squares);
+            cube.rotate_face_clock_wise(BOTTOM, _squares);
             return cube;
         }
 
-        void dumpTo(ostream& os) const override
+        void dump_to(ostream& os) const override
         {
-            os << "Left Counter " << _squares;
+            os << "Bottom Clock " << _squares;
         }
 
-        friend ostream& operator<<(ostream& os, const RotateLeftCounterClockWise& r)
+        friend ostream& operator<<(ostream& os, const rotate_bottom_clock_wise& r)
         {
-            r.dumpTo(os);
+            r.dump_to(os);
             return os;
         }
 };

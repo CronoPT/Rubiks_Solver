@@ -10,13 +10,13 @@
 |   '-m----m-'                                                       |
 ====================================================================*/
 
-#ifndef __RUBIKSCUBE_H__
-#define __RUBIKSCUBE_H__ 
+#ifndef __RUBIKS_CUBE_H__
+#define __RUBIKS_CUBE_H__ 
 
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Face.h"
+#include "face.h"
 
 using namespace std;
 
@@ -46,46 +46,46 @@ using namespace std;
 |     * bottom: as if you turned the bottom face to you, leaving 
 |     the front face faced up
 ==============================================================*/
-class RubiksCube
+class rubiks_cube
 {
     private:
-        vector<Face> _faces;
+        vector<face> _faces;
         int _n;
 
-        void rotateFrontClockWise(int squares);
-        void rotateBackClockWise(int squares);
-        void rotateTopClockWise(int squares);
-        void rotateBottomClockWise(int squares);
-        void rotateRightClockWise(int squares);
-        void rotateLeftClockWise(int squares);
+        void rotate_front_clock_wise(int squares);
+        void rotate_back_clock_wise(int squares);
+        void rotate_top_clock_wise(int squares);
+        void rotate_bottom_clock_wise(int squares);
+        void rotate_right_clock_wise(int squares);
+        void rotate_left_clock_wise(int squares);
 
-        void rotateFrontCounterClockWise(int squares);
-        void rotateBackCounterClockWise(int squares);
-        void rotateTopCounterClockWise(int squares);
-        void rotateBottomCounterClockWise(int squares);
-        void rotateRightCounterClockWise(int squares);
-        void rotateLeftCounterClockWise(int squares);
+        void rotate_front_counter_clock_wise(int squares);
+        void rotate_back_counter_clock_wise(int squares);
+        void rotate_top_counter_clock_wise(int squares);
+        void rotate_bottom_counter_clock_wise(int squares);
+        void rotate_right_counter_clock_wise(int squares);
+        void rotate_left_counter_clock_wise(int squares);
 
-        int getFaceToTop(int face)    const;
-        int getFaceToBottom(int face) const;
-        int getFaceToRight(int face)  const;
-        int getFaceToLeft(int faces)  const;
+        int get_face_to_top(int face)    const;
+        int get_face_to_bottom(int face) const;
+        int get_face_to_right(int face)  const;
+        int get_face_to_left(int faces)  const;
 
     public:
-        RubiksCube(int n, vector<Face> faces);
-        RubiksCube(int n, Face front, Face bottom, Face right, \
-          Face left, Face top, Face back);
-        void   rotateFaceClockWise(int face, int squares);
-        void   rotateFaceCounterClockWise(int face, int squares);
-        int    getN() const;
-        vector<Face> getFaces() const;
-        Face   getFace(int face) const;
-        string getFaceDescription(int face) const;
+        rubiks_cube(int n, vector<face> faces);
+        rubiks_cube(int n, face front, face bottom, face right, \
+          face left, face top, face back);
+        void   rotate_face_clock_wise(int face, int squares);
+        void   rotate_face_counter_clock_wise(int face, int squares);
+        int    get_n() const;
+        vector<face> get_faces() const;
+        face   get_face(int face) const;
+        string get_face_description(int face) const;
         bool   solved();
-        friend ostream& operator<<(ostream& os, const RubiksCube& cube);
-        friend bool     operator==(const RubiksCube& cube_1, const RubiksCube& cube_2);
-        friend bool     operator!=(const RubiksCube& cube_1, const RubiksCube& cube_2);
-        friend bool     operator<(const RubiksCube& cube_1, const RubiksCube& cube_2);
+        friend ostream& operator<<(ostream& os, const rubiks_cube& cube);
+        friend bool     operator==(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+        friend bool     operator!=(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
+        friend bool     operator<(const rubiks_cube& cube_1, const rubiks_cube& cube_2);
 };
 
 #endif
