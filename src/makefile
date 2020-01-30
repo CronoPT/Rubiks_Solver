@@ -20,5 +20,5 @@ a_star_search.o: search/a_star_search.h search/a_star_search.cpp search/node.h s
 	$(CC) $(CFLAGS) -c search/a_star_search.cpp
 
 clean:
-	rm *.o
+	rm *.o rubiks_solver
 

@@ -39,6 +39,7 @@ class face
 
     public:
         face(int n, std::vector<char> squares);
+        face();
         int   get_n() const;
         char  get_position_by_index(int index) const;
         char  get_position(int l, int c) const;
