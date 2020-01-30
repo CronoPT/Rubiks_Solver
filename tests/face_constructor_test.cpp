@@ -1,5 +1,4 @@
 #include "../src/face.h"
-#include "../src/face.cpp"
 #include <gtest/gtest.h>
 
 class face_constructor_test: public testing::Test

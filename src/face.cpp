@@ -188,6 +188,7 @@ bool cube::face::all_same_color()
 std::ostream& cube::operator<<(std::ostream& os, const cube::face& face)
 {   
     int n = face.get_n();
+    os << std::endl;
     for(int l=0; l<n; l++)
     {
         for(int c=0; c<n; c++)
@@ -209,7 +210,7 @@ bool cube::operator==(const cube::face& face_1, const cube::face& face_2)
 
     int n = face_1.get_n();
 
-    for(int i=0; i<n; i++)
+    for(int i=0; i<n*n; i++)
         if(face_1.get_position_by_index(i) != face_2.get_position_by_index(i))
             return false;
 
