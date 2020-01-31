@@ -31,6 +31,11 @@ cube::rubiks_cube::rubiks_cube(int n, cube::face front, cube::face bottom, \
 
 }
 
+cube::rubiks_cube::rubiks_cube(): _faces(), _n(0)
+{
+
+}
+
 /*==============================================================
 | function: rotatefaceClockWise
 ==============================================================*/
@@ -132,6 +137,7 @@ std::string cube::rubiks_cube::get_face_description(int face) const
         case LEFT:
             return "left";
     }
+    return "invalid";
 }
 
 /*==============================================================
@@ -149,7 +155,7 @@ bool cube::rubiks_cube::solved()
 /*==============================================================
 | function: "toString equivalent"
 ==============================================================*/
-std::ostream& operator<<(std::ostream& os, const cube::rubiks_cube& cube)
+std::ostream& cube::operator<<(std::ostream& os, const cube::rubiks_cube& cube)
 {
     for(int i=0; i<6; i++)
     {
@@ -501,6 +507,7 @@ int cube::rubiks_cube::get_face_to_top(int face) const
         case LEFT:
             return TOP;
     }
+    return INVALID;
 }
 
 /*==============================================================
@@ -524,6 +531,7 @@ int cube::rubiks_cube::get_face_to_bottom(int face) const
         case LEFT:
             return BOTTOM;
     }
+    return INVALID;
 }
 
 /*==============================================================
@@ -547,6 +555,7 @@ int cube::rubiks_cube::get_face_to_right(int face) const
         case LEFT:
             return FRONT;
     }
+    return INVALID;
 }
 
 /*==============================================================
@@ -570,4 +579,5 @@ int cube::rubiks_cube::get_face_to_left(int face) const
         case LEFT:
             return BACK;
     }
+    return INVALID;
 }

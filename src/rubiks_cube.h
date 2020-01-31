@@ -22,12 +22,13 @@
 | Just following the layout of a regular d6 die. Every oposing
 | face sums 5 (7 in a regular die).
 ==============================================================*/
-#define FRONT  0
-#define BACK   5
-#define TOP    4
-#define BOTTOM 1 
-#define RIGHT  2
-#define LEFT   3
+#define FRONT    0
+#define BACK     5
+#define TOP      4
+#define BOTTOM   1 
+#define RIGHT    2
+#define LEFT     3
+#define INVALID -1
 
 /*==============================================================
 | class: Rubik's Cube
@@ -76,6 +77,7 @@ class rubiks_cube
         rubiks_cube(int n, std::vector<face> faces);
         rubiks_cube(int n, face front, face bottom, face right, \
           face left, face top, face back);
+        rubiks_cube();
         void   rotate_face_clock_wise(int face, int squares);
         void   rotate_face_counter_clock_wise(int face, int squares);
         int    get_n() const;
