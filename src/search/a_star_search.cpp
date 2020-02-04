@@ -22,9 +22,7 @@ std::vector<std::shared_ptr<search::action<C>>> search::a_star_search<C>::execut
                                                                  nullptr, nullptr, 0,
                                                                  problem->heuristic(
                                                                  problem->get_initial_state()));
-    std::priority_queue<std::shared_ptr<search::node<C>>, 
-                        std::vector<std::shared_ptr<search::node<C>>>, 
-                        std::greater<std::shared_ptr<search::node<C>>>> frontier;
+    std::priority_queue<std::shared_ptr<search::node<C>>> frontier;
     std::set<C> explored;
     std::vector<std::shared_ptr<action<C>>> actions;
 
@@ -52,7 +50,8 @@ std::vector<std::shared_ptr<search::action<C>>> search::a_star_search<C>::execut
             }
         }
     } 
-    //throw some exception indicating the problem has no solution        
+    //throw some exception indicating the problem has no solution
+    return std::vector<std::shared_ptr<action<C>>>();    
 }
 
 /*==============================================================

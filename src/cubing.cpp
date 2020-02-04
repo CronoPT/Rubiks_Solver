@@ -41,7 +41,6 @@ bool cube::cubing::goal_test(cube::rubiks_cube cube)
 
 double cube::cubing::heuristic(cube::rubiks_cube cube) const
 {
-    return 0;
     if(cube.solved())
         return 0;
 

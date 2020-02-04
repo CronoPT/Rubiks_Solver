@@ -57,28 +57,28 @@ rubiks_cube foo()
 {
 	// front | bottom | right | left | top | back
 
-    vector<char> aux = {WHITE,  YELLOW,
-                        YELLOW, WHITE };
+    vector<char> aux = {WHITE, ORANGE,
+                        BLUE, RED};
     face front_face(2, aux);
     
-    aux = {ORANGE, BLUE, 
-           RED,    RED };
+    aux = {YELLOW, RED, 
+           WHITE, GREEN};
     face back_face(2, aux);
 
-    aux = {RED,   GREEN, 
-           GREEN, BLUE };
+    aux = {GREEN, RED, 
+           YELLOW, GREEN};
     face right_face(2, aux);
 
-    aux = {RED,   ORANGE, 
-           GREEN, ORANGE };
+    aux = {BLUE, ORANGE, 
+           YELLOW,  YELLOW};
     face left_face(2, aux);
 
-    aux = {YELLOW, YELLOW, 
-           BLUE,   GREEN };
+    aux = {WHITE, BLUE, 
+           BLUE,  WHITE};
     face top_face(2, aux);
 
-    aux = {BLUE, ORANGE, 
-           WHITE, WHITE};
+    aux = {ORANGE, GREEN, 
+           ORANGE, RED};
     face bottom_face(2, aux);
 
     vector<face> faces = {front_face, bottom_face, right_face, left_face, top_face, back_face};

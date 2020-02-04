@@ -61,13 +61,13 @@ class node
 
         bool operator<(const node<C>& other)
         {
-            return get_path_cost() + get_heuristic() < 
+            return get_path_cost() + get_heuristic() > 
                    other.get_path_cost() + other.get_heuristic();
         }
 
         bool operator>(const node<C>& other)
         {
-            return get_path_cost() + get_heuristic() > 
+            return get_path_cost() + get_heuristic() < 
                    other.get_path_cost() + other.get_heuristic();
         }
 
