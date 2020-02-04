@@ -2,7 +2,7 @@
 #include "../src/rubiks_cube.h"
 #include <gtest/gtest.h>
 
-class rubiks_cube_rotate_back_clock_wise: public testing::Test
+class rubiks_cube_rotate_right_clock_wise_test: public testing::Test
 {   
     protected:
     std::vector<char> _aux;
@@ -17,7 +17,7 @@ class rubiks_cube_rotate_back_clock_wise: public testing::Test
     cube::rubiks_cube _resulting_cube;
 };
 
-TEST_F(rubiks_cube_rotate_back_clock_wise, two_sided)
+TEST_F(rubiks_cube_rotate_right_clock_wise_test, two_sided)
 {
     _aux = {WHITE, GREEN, 
             RED  , WHITE};
@@ -48,39 +48,39 @@ TEST_F(rubiks_cube_rotate_back_clock_wise, two_sided)
 
     //------------
 
-    _aux = {WHITE, GREEN, 
-            RED  , WHITE};
+    _aux = {WHITE, RED, 
+            RED  , GREEN};
     _front = cube::face(2, _aux);
 
-    _aux = {BLUE , RED, 
-            GREEN, RED};
+    _aux = {BLUE  , WHITE, 
+            YELLOW, ORANGE};
     _bottom = cube::face(2, _aux);
 
-    _aux = {RED , GREEN, 
-            BLUE, YELLOW};
+    _aux = {BLUE, RED, 
+            ORANGE, YELLOW};
     _right = cube::face(2, _aux);
 
-    _aux = {BLUE  , ORANGE, 
-            ORANGE, YELLOW};
+    _aux = {GREEN, ORANGE, 
+            RED  , YELLOW};
     _left = cube::face(2, _aux);
 
-    _aux = {YELLOW, ORANGE, 
+    _aux = {ORANGE, GREEN, 
             BLUE  , WHITE};
     _top = cube::face(2, _aux);
 
-    _aux = {WHITE, ORANGE, 
-            GREEN, YELLOW};
+    _aux = {WHITE, YELLOW, 
+            BLUE , GREEN};
     _back = cube::face(2, _aux);
 
     _faces = {_front, _bottom, _right, _left, _top, _back};
     _resulting_cube = cube::rubiks_cube(2, _faces);
 
-    _cube.rotate_face_clock_wise(BACK, 1);
+    _cube.rotate_face_clock_wise(RIGHT, 1);
 
     ASSERT_EQ(_resulting_cube, _cube);
 }
 
-TEST_F(rubiks_cube_rotate_back_clock_wise, three_sided)
+TEST_F(rubiks_cube_rotate_right_clock_wise_test, three_sided)
 {
     _aux = {WHITE , GREEN , WHITE,
             BLUE  , WHITE , BLUE,
@@ -117,40 +117,40 @@ TEST_F(rubiks_cube_rotate_back_clock_wise, three_sided)
 
     //------------
 
-    _aux = {WHITE , GREEN , WHITE,
-            BLUE  , WHITE , BLUE,
-            YELLOW, YELLOW, BLUE};
+    _aux = {WHITE , GREEN , YELLOW,
+            BLUE  , WHITE , ORANGE,
+            YELLOW, YELLOW, RED};
     _front = cube::face(3, _aux);
 
-    _aux = {RED  , GREEN , YELLOW,
-            BLUE , RED   , ORANGE,
-            GREEN, ORANGE, RED};
+    _aux = {RED  , GREEN , GREEN,
+            BLUE , RED   , WHITE,
+            WHITE, ORANGE, WHITE};
     _bottom = cube::face(3, _aux);
 
-    _aux = {BLUE  , WHITE, RED,
-            YELLOW, BLUE , ORANGE,
-            ORANGE, GREEN, WHITE};
+    _aux = {ORANGE, YELLOW, BLUE,
+            GREEN , BLUE  , WHITE,
+            YELLOW, GREEN , RED};
     _right = cube::face(3, _aux);
 
     _aux = {GREEN , YELLOW, GREEN,
-            BLUE  , GREEN , RED,
-            ORANGE, WHITE , BLUE};
+            ORANGE, GREEN , RED,
+            RED   , WHITE , BLUE};
     _left = cube::face(3, _aux);
 
-    _aux = {RED   , GREEN , YELLOW,
-            RED   , ORANGE, RED,
-            ORANGE, RED   , ORANGE};
+    _aux = {ORANGE, BLUE  , WHITE,
+            RED   , ORANGE, BLUE,
+            ORANGE, RED   , BLUE};
     _top = cube::face(3, _aux);
 
-    _aux = {GREEN, WHITE , WHITE,
-            WHITE, YELLOW, ORANGE,
-            BLUE , YELLOW, YELLOW};
+    _aux = {ORANGE, ORANGE, YELLOW,
+            RED   , YELLOW, YELLOW,
+            GREEN , WHITE , BLUE};
     _back = cube::face(3, _aux);
 
     _faces = {_front, _bottom, _right, _left, _top, _back};
     _resulting_cube  = cube::rubiks_cube(3, _faces);
 
-    _cube.rotate_face_clock_wise(BACK, 1);
+    _cube.rotate_face_clock_wise(RIGHT, 1);
 
     ASSERT_EQ(_resulting_cube, _cube);
 }

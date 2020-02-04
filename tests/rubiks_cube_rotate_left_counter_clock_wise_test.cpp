@@ -2,7 +2,7 @@
 #include "../src/rubiks_cube.h"
 #include <gtest/gtest.h>
 
-class rubiks_cube_rotate_left_counter_clock_wise: public testing::Test
+class rubiks_cube_rotate_left_counter_clock_wise_test: public testing::Test
 {   
     protected:
     std::vector<char> _aux;
@@ -17,7 +17,7 @@ class rubiks_cube_rotate_left_counter_clock_wise: public testing::Test
     cube::rubiks_cube _resulting_cube;
 };
 
-TEST_F(rubiks_cube_rotate_left_counter_clock_wise, two_sided)
+TEST_F(rubiks_cube_rotate_left_counter_clock_wise_test, two_sided)
 {
     _aux = {WHITE, GREEN, 
             RED  , WHITE};
@@ -80,7 +80,7 @@ TEST_F(rubiks_cube_rotate_left_counter_clock_wise, two_sided)
     ASSERT_EQ(_resulting_cube, _cube);
 }
 
-TEST_F(rubiks_cube_rotate_left_counter_clock_wise, three_sided)
+TEST_F(rubiks_cube_rotate_left_counter_clock_wise_test, three_sided)
 {
     _aux = {WHITE , GREEN , WHITE,
             BLUE  , WHITE , BLUE,
